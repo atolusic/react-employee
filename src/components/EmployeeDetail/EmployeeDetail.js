@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import EmployeeForm from '../EmployeeForm/EmployeeForm';
 import Modal from '../UI/Modal/Modal';
+import { initEmployees } from '../../store/actions/employees';
+import Spinner from '../UI/Spinner/Spinner';
 
 class EmployeeDetail extends Component {
 
     state = {
-        name: this.props.location.state.name,
-        age: this.props.location.state.age
+        name: '',
+        age: 18
+    }
+
+    componentDidMount() {
+        this.props.initEmployees();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.employees) {
+            this.setState({
+                name: nextProps.employees[this.props.match.params.id].name,
+                age: nextProps.employees[this.props.match.params.id].age
+            })
+        }
     }
 
     onDetailChangeHandler = (name, value) => {
@@ -16,25 +32,33 @@ class EmployeeDetail extends Component {
     }
 
     render() {
-        return (
+
+        let detail = <Spinner />
+
+        if(this.props.employees) {
+            detail = (
                 <div>
                     <Modal show={this.props.show}>Employee details updated successfully!</Modal>
                     <h3>Name: {this.state.name}</h3>
                     <h4>Age: {this.state.age}</h4>
                     <EmployeeForm
-                        id={this.props.location.state.id}
-                        updateName={this.state.name}
-                        updateAge={this.state.age}
+                        id={this.props.match.params.id}
+                        updateName={this.props.employees[this.props.match.params.id].name}
+                        updateAge={this.props.employees[this.props.match.params.id].age}
                         detailHandler={this.onDetailChangeHandler} />
                 </div>
-        );
+            );
+        }
+
+        return detail;
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        show: state.showModal
+        show: state.showModal,
+        employees: state.employees
     }
 }
 
-export default connect(mapStateToProps)(EmployeeDetail);
+export default withRouter(connect(mapStateToProps, { initEmployees })(EmployeeDetail));
