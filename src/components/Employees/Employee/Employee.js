@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Aux from '../../../hoc/Aux';
+import Auxiliary from '../../../hoc/Auxiliary';
 
 const employee = (props) => {
     return (
-        <Aux>
+        <Auxiliary>
             <li onClick={() => props.showDetails(props.employee)}>
                 {props.employee.name}
             </li>
             <button onClick={() => props.delete(props.employee)}> X </button>
-        </Aux>
+        </Auxiliary>
     );
 }
 

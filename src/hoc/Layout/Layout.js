@@ -1,16 +1,16 @@
 import React from 'react';
 
-import Aux from '../Aux';
+import Auxiliary from '../Auxiliary';
 import Navigation from '../../components/UI/Navigation/NavigationItems';
 
 const Layout = (props) => {
     return (
-        <Aux>
+        <Auxiliary>
             <main>
                 <Navigation />
                 {props.children}
             </main>
-        </Aux>
+        </Auxiliary>
     );
 }
 

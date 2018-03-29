@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Aux from '../../hoc/Aux';
+import Auxiliary from '../../hoc/Auxiliary';
 import { addEmployee, updateEmployee } from '../../store/actions/employees';
 import FormErrors from './FormErrors/FormErrors';
 
@@ -84,7 +84,7 @@ class EmployeeForm extends Component {
 
     render() {
         return (
-            <Aux>
+            <Auxiliary>
                 {console.log(this.props)}
                 <FormErrors formErrors={this.state.formErrors} />
                 <form onSubmit={(e) => this.onSubmit(e)}>
@@ -104,7 +104,7 @@ class EmployeeForm extends Component {
                         onChange={(e) => this.handleUserInput(e)} />
                     <button disabled={!this.state.formValid}>{this.props.add ? 'ADD EMPLOYE' : 'UPDATE'}</button>
                 </form>
-            </Aux>
+            </Auxiliary>
         );
     }
 }
