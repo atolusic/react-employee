@@ -8,12 +8,16 @@ import classes from './Employees.css';
 import { initEmployees, addEmployee, deleteEmployee } from '../../store/actions/employees';
 import Spinner from '../UI/Spinner/Spinner';
 import SearchEmployee from '../SearchEmployee/SearchEmployee';
+import Modal from '../UI/Modal/Modal';
+import DeleteModal from '../UI/DeleteModal/DeleteModal';
 
 class Employees extends Component {
 
     state = {
         selectedEmployee: null,
-        searchFilter: ''
+        searchFilter: '',
+        showModal: false,
+        readyForDelete: null
     }
 
     componentDidMount() {
@@ -25,11 +29,20 @@ class Employees extends Component {
     }
 
     onDeleteClickHandler = (employee) => {
-        this.props.deleteEmployee(employee.id);
+        this.setState({ showModal: true, readyForDelete: employee });
     }
 
     onSearchHandler = (e) => {
         this.setState({ searchFilter: e.target.value })
+    }
+
+    deleteHandler = (e) => {
+        if(e.target.name === 'Yes') {
+            this.props.deleteEmployee(this.state.readyForDelete.id);
+            this.setState({ readyForDelete: null, showModal: false });
+        } else {
+            this.setState({ showModal: false, readyForDelete: null });
+        }
     }
 
     render() {
@@ -84,9 +97,15 @@ class Employees extends Component {
                 <h2>Employees</h2>
                 <hr />
                 <AddEmployee />
-                <SearchEmployee employees={this.props.employees ? false : true} search={this.state.searchFilter} searchHandler={this.onSearchHandler} />
+                <SearchEmployee
+                    employees={this.props.employees ? false : true}
+                    search={this.state.searchFilter}
+                    searchHandler={this.onSearchHandler} />
                 {employees}
                 {employeeDetails}
+                <Modal show={this.state.showModal}>
+                    <DeleteModal deleteHandler={this.deleteHandler} />
+                </Modal>
             </div>
         );
     }
