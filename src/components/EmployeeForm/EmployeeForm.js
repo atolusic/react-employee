@@ -85,7 +85,6 @@ class EmployeeForm extends Component {
     render() {
         return (
             <Auxiliary>
-                {console.log(this.props)}
                 <FormErrors formErrors={this.state.formErrors} />
                 <form onSubmit={(e) => this.onSubmit(e)}>
                     <label>Name: </label>

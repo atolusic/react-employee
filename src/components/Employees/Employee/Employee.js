@@ -6,7 +6,8 @@ const employee = (props) => {
     return (
         <Auxiliary>
             <li onClick={() => props.showDetails(props.employee)}>
-                {props.employee.name}
+                <span>Name: {props.employee.name}</span>
+                <span>Age: {props.employee.age}</span>
             </li>
             <button onClick={() => props.delete(props.employee)}> X </button>
         </Auxiliary>

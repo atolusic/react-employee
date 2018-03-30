@@ -7,11 +7,13 @@ import Employee from './Employee/Employee';
 import classes from './Employees.css';
 import { initEmployees, addEmployee, deleteEmployee } from '../../store/actions/employees';
 import Spinner from '../UI/Spinner/Spinner';
+import SearchEmployee from '../SearchEmployee/SearchEmployee';
 
 class Employees extends Component {
 
     state = {
-        selectedEmployee: null
+        selectedEmployee: null,
+        searchFilter: ''
     }
 
     componentDidMount() {
@@ -26,8 +28,12 @@ class Employees extends Component {
         this.props.deleteEmployee(employee.id);
     }
 
+    onSearchHandler = (e) => {
+        this.setState({ searchFilter: e.target.value })
+    }
+
     render() {
-        let employees = <Spinner />;
+        let employees = <Spinner />
 
         if(this.props.employees) {
 
@@ -47,13 +53,16 @@ class Employees extends Component {
                         showDetails={this.showDetalisHandler}
                         delete={this.onDeleteClickHandler} />
                 );
-            });
+            }).filter(employee => {
+                return employee.props.employee.name.includes(this.state.searchFilter);
+            })
         }
 
-        let employeeDetails = <p>Click on employee for details!</p>;
+        let employeeDetails = this.props.employees ? <p>Click on employee for details!</p> : null;
 
         if(this.state.selectedEmployee) {
-            employeeDetails = (
+            if(this.props.employees[this.state.selectedEmployee.id]) {
+                employeeDetails = (
                     <div>
                         <h3>Employee Details</h3>
                         {this.state.selectedEmployee.name}
@@ -63,9 +72,11 @@ class Employees extends Component {
                             state: {name: this.state.selectedEmployee.name, age: this.state.selectedEmployee.age, id: this.state.selectedEmployee.id}
                             }}
                             >
-                            Show Details</Link>
+                            Show Details
+                        </Link>
                     </div>
-            );
+                );
+            }
         }
 
         return (
@@ -73,6 +84,7 @@ class Employees extends Component {
                 <h2>Employees</h2>
                 <hr />
                 <AddEmployee />
+                <SearchEmployee employees={this.props.employees ? false : true} search={this.state.searchFilter} searchHandler={this.onSearchHandler} />
                 {employees}
                 {employeeDetails}
             </div>
