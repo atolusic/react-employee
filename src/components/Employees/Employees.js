@@ -104,7 +104,9 @@ class Employees extends Component {
                 {employees}
                 {employeeDetails}
                 <Modal show={this.state.showModal}>
-                    <DeleteModal deleteHandler={this.deleteHandler} />
+                    <DeleteModal
+                        employee={this.state.readyForDelete}
+                        deleteHandler={this.deleteHandler} />
                 </Modal>
             </div>
         );

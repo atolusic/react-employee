@@ -4,6 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 
 import { initEmployees } from '../../store/actions/employees';
 import Spinner from '../UI/Spinner/Spinner';
+import classes from './Dashboard.css';
 
 class Dashboard extends Component {
 
@@ -25,17 +26,19 @@ class Dashboard extends Component {
                     });
                 }
 
-                employees = fetchedEmployees.map(employee => {
+                employees = fetchedEmployees.map((employee, i) => {
                     return (
-                        <Link key={employee.id} to={`/employees/${employee.id}`} details={employee} >
-                            {employee.name}
-                        </Link>
+                        <li>
+                            <Link key={employee.id} to={`/employees/${employee.id}`} details={employee} >
+                                <span>{i + 1}.</span> {employee.name}
+                            </Link>
+                        </li>
                     );
                 }).slice(0, 5);
             }
 
         return (
-            <div>
+            <div className={classes.Dashboard}>
                 <h2>Top Employees</h2>
                 <NavLink to="/employees"></NavLink>
                 <ul>

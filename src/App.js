@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+import './App.css';
 import Layout from './hoc/Layout/Layout';
 import Dashboard from './components/Dashboard/Dashboard';
 import Employees from './components/Employees/Employees';
