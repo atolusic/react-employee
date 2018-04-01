@@ -1,3 +1,38 @@
 .Employees {
-    color: red;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    align-items: center;
+}
+
+.Employees h2 {
+    font-size: 3rem;
+    margin: 3rem 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #333;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
+    font-weight: 700;
+}
+
+.Employees .Employees_forms {
+    width: 70%;
+    height: 70%;
+    background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 133, 0.7));
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.4);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Employees .Employees_forms .Employees_forms_left {
+    width: 50%;
+
+}
+.Employees .Employees_forms .Employees_forms_right {
+    width: 50%;
+}
+
+.Employees .EmployeeList {
+    list-style: none;
 }

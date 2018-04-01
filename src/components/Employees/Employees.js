@@ -94,20 +94,27 @@ class Employees extends Component {
 
         return (
             <div className={classes.Employees}>
-                <h2>Employees</h2>
-                <hr />
-                <AddEmployee />
-                <SearchEmployee
-                    employees={this.props.employees ? false : true}
-                    search={this.state.searchFilter}
-                    searchHandler={this.onSearchHandler} />
-                {employees}
-                {employeeDetails}
-                <Modal show={this.state.showModal}>
-                    <DeleteModal
-                        employee={this.state.readyForDelete}
-                        deleteHandler={this.deleteHandler} />
-                </Modal>
+                    <h2>Employees</h2>
+                    <div className={classes.Employees_forms}>
+                        <div className={classes.Employees_forms_left}>
+                            <AddEmployee />
+                            <SearchEmployee
+                                employees={this.props.employees ? false : true}
+                                search={this.state.searchFilter}
+                                searchHandler={this.onSearchHandler} />
+                        </div>
+                        <div className={classes.Employees_forms_right}>
+                            <ul className={classes.EmployeeList}>
+                                {employees}
+                            </ul>
+                            {employeeDetails}
+                        </div>
+                        <Modal show={this.state.showModal}>
+                            <DeleteModal
+                                employee={this.state.readyForDelete}
+                                deleteHandler={this.deleteHandler} />
+                        </Modal>
+                    </div>
             </div>
         );
     }

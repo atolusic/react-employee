@@ -5,8 +5,10 @@
     transform: translate(-50%, -50%);
     width: 50%;
     height: 50%;
-    color: #f7f7f7;
-    background-color: rgba(0, 0, 0, 0.3);
+    color: #333;
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    /* background-image: linear-gradient(to right bottom, #7ed56f, #28b485); */
+    background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 133, 0.7));
     font-size: 1.2rem;
     border-radius: 5px;
     backface-visibility: hidden;
@@ -15,11 +17,14 @@
 
 .Dashboard h2 {
     text-transform: uppercase;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     margin-bottom: 1rem;
     text-align: center;
     position: relative;
     letter-spacing: 3px;
+    font-size: 2.3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
 }
 
 .Dashboard ul {
@@ -42,9 +47,11 @@
 .Dashboard ul li a:link,
 .Dashboard ul li a:visited {
     text-decoration: none;
-    color: #f7f7f7;
+    color: #333;
+    font-weight: 600;
+    font-size: 2.1rem;
     transition: all .2s;
-    padding: .2rem;
+    padding: .1rem;
     backface-visibility: hidden;
 }
 

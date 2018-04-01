@@ -1,0 +1,57 @@
+.Button,
+.Button:visited,
+.Button:active {
+    margin-top: 1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    background-color: #55c57a;
+    color: #fff;
+    outline: none;
+}
+
+.Button::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+    background-color: #55c57a;
+    outline: none;
+}
+
+.Button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(#000, .2);
+    outline: none;
+}
+
+.Button:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+    outline: none;
+}
+
+.Button:disabled {
+    background-color: rgba(85, 197, 122, 0.1);
+    cursor: not-allowed;
+    outline: none;
+}
+
+.Button:disabled::after {
+    background-color: rgba(85, 197, 122, 0.1);
+    cursor: not-allowed;
+    outline: none;
+}

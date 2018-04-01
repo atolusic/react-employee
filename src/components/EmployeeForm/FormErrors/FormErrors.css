@@ -1,0 +1,10 @@
+.FormErrors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 6rem;
+    color: #ff7730;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}

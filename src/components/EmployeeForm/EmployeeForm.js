@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import Auxiliary from '../../hoc/Auxiliary';
 import { addEmployee, updateEmployee } from '../../store/actions/employees';
 import FormErrors from './FormErrors/FormErrors';
+import classes from './EmployeeForm.css';
+import Button from '../UI/Button/Button';
 
 class EmployeeForm extends Component {
     state = {
@@ -15,7 +17,7 @@ class EmployeeForm extends Component {
             age: ''
         },
         nameValid: false,
-        ageValid: false,
+        ageValid: true,
         formValid: false
     }
 
@@ -86,22 +88,27 @@ class EmployeeForm extends Component {
         return (
             <Auxiliary>
                 <FormErrors formErrors={this.state.formErrors} />
-                <form onSubmit={(e) => this.onSubmit(e)}>
-                    <label>Name: </label>
+                <form className={classes.EmployeeForm} onSubmit={(e) => this.onSubmit(e)}>
                     <input
+                        id="name"
+                        placeholder="Employee Name"
                         required
                         name="name"
                         type="text"
                         value={this.state.name}
                         onChange={(e) => this.handleUserInput(e)} />
-                    <label>Age: </label>
+                    <label htmlFor="name" className={classes.EmployeeForm_label} >Employee Name</label>
                     <input
+                        id="age"
+                        className={this.state.ageValid ? classes.AgeValid : classes.AgeInvalid}
+                        placeholder="Employee Age"
                         required
                         name="age"
                         type="number"
                         value={this.state.age}
                         onChange={(e) => this.handleUserInput(e)} />
-                    <button disabled={!this.state.formValid}>{this.props.add ? 'ADD EMPLOYE' : 'UPDATE'}</button>
+                    <label htmlFor="age" className={classes.EmployeeForm_label} >Employee Age</label>
+                    <Button disabled={!this.state.formValid}>{this.props.add ? 'ADD EMPLOYE' : 'UPDATE'}</Button>
                 </form>
             </Auxiliary>
         );

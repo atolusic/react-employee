@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Auxiliary from '../../../hoc/Auxiliary';
 import EmployeeForm from '../../EmployeeForm/EmployeeForm';
+import classes from './AddEmployee.css';
 
 const addEmployee = (props) => {
     return (
-        <Auxiliary>
+        <div className={classes.AddEmployee}>
             <h3>Add Employee</h3>
             <EmployeeForm add />
-        </Auxiliary>
+        </div>
     );
 }
 

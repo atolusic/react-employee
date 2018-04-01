@@ -1,7 +1,9 @@
 import React from 'react';
 
+import classes from './FormErrors.css';
+
 const formErrors = ({ formErrors }) => (
-    <div>
+    <div className={classes.FormErrors}>
     {Object.keys(formErrors).map((fieldName, i) => {
         if(formErrors[fieldName].length > 0){
           return (
