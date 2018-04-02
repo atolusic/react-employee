@@ -51,3 +51,10 @@
 .EmployeeForm .AgeInvalid:focus {
     border-bottom: 3px solid #ff7730;
 }
+
+@media only screen and (max-height: 850px) {
+    .EmployeeForm input {
+        height: 4rem;
+        padding: .5rem;
+    }
+}

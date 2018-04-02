@@ -1,16 +1,18 @@
 import React from 'react';
 
-import Auxiliary from '../../../hoc/Auxiliary';
+import classes from './Employee.css';
+import Button from '../../UI/Button/Button';
 
 const employee = (props) => {
+
     return (
-        <Auxiliary>
-            <li onClick={() => props.showDetails(props.employee)}>
-                <span>Name: {props.employee.name}</span>
-                <span>Age: {props.employee.age}</span>
+            <li
+                onClick={() => props.showDetails(props.employee)}
+                className={classes.Employee}>
+                    <span>0{props.empNum} </span>{props.employee.name}
+                    <Button
+                        delete={() => props.delete(props.employee)}> X </Button>
             </li>
-            <button onClick={() => props.delete(props.employee)}> X </button>
-        </Auxiliary>
     );
 }
 

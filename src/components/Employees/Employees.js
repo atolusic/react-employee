@@ -58,34 +58,34 @@ class Employees extends Component {
                     });
                 }
 
-            employees = fetchedEmployees.map(employee => {
+            employees = fetchedEmployees.map((employee, i) => {
                 return (
                     <Employee
+                        empNum={i + 1}
                         key={employee.id}
                         employee={employee}
                         showDetails={this.showDetalisHandler}
                         delete={this.onDeleteClickHandler} />
                 );
             }).filter(employee => {
-                return employee.props.employee.name.includes(this.state.searchFilter);
+                return employee.props.employee.name.toLowerCase().includes(this.state.searchFilter);
             })
         }
 
-        let employeeDetails = this.props.employees ? <p>Click on employee for details!</p> : null;
+        let employeeDetails = this.props.employees ? <p className={classes.SelectedEmployee}>Click on employee for details!</p> : null;
 
         if(this.state.selectedEmployee) {
             if(this.props.employees[this.state.selectedEmployee.id]) {
                 employeeDetails = (
-                    <div>
-                        <h3>Employee Details</h3>
-                        {this.state.selectedEmployee.name}
-                        {this.state.selectedEmployee.age}
+                    <div className={classes.SelectedEmployee}>
+                        <p><span>Employee Name: </span>{this.state.selectedEmployee.name}</p>
+                        <p><span>Employee Age:  </span>{this.state.selectedEmployee.age}</p>
                         <Link
                             to={{pathname: `${this.props.match.path}/${this.state.selectedEmployee.id}`,
                             state: {name: this.state.selectedEmployee.name, age: this.state.selectedEmployee.age, id: this.state.selectedEmployee.id}
                             }}
                             >
-                            Show Details
+                            Show Details →
                         </Link>
                     </div>
                 );
@@ -98,16 +98,17 @@ class Employees extends Component {
                     <div className={classes.Employees_forms}>
                         <div className={classes.Employees_forms_left}>
                             <AddEmployee />
-                            <SearchEmployee
-                                employees={this.props.employees ? false : true}
-                                search={this.state.searchFilter}
-                                searchHandler={this.onSearchHandler} />
                         </div>
                         <div className={classes.Employees_forms_right}>
+                            <h3>Employee Details</h3>
+                            {employeeDetails}
+                            <SearchEmployee
+                            employees={this.props.employees ? false : true}
+                            search={this.state.searchFilter}
+                            searchHandler={this.onSearchHandler} />
                             <ul className={classes.EmployeeList}>
                                 {employees}
                             </ul>
-                            {employeeDetails}
                         </div>
                         <Modal show={this.state.showModal}>
                             <DeleteModal

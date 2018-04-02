@@ -6,6 +6,8 @@ import EmployeeForm from '../EmployeeForm/EmployeeForm';
 import Modal from '../UI/Modal/Modal';
 import { initEmployees } from '../../store/actions/employees';
 import Spinner from '../UI/Spinner/Spinner';
+import classes from './EmployeeDetail.css';
+import Auxiliary from '../../hoc/Auxiliary';
 
 class EmployeeDetail extends Component {
 
@@ -37,20 +39,22 @@ class EmployeeDetail extends Component {
 
         if(this.props.employees) {
             detail = (
-                <div>
+                <Auxiliary>
                     <Modal show={this.props.show}>Employee details updated successfully!</Modal>
-                    <h3>Name: {this.state.name}</h3>
-                    <h4>Age: {this.state.age}</h4>
+                    <div className={classes.DetailText}>
+                        <p><strong>Name:</strong> &nbsp; {this.state.name}</p>
+                        <p><strong>Age:</strong> &nbsp; {this.state.age}</p>
+                    </div>
                     <EmployeeForm
                         id={this.props.match.params.id}
                         updateName={this.props.employees[this.props.match.params.id].name}
                         updateAge={this.props.employees[this.props.match.params.id].age}
                         detailHandler={this.onDetailChangeHandler} />
-                </div>
+                </Auxiliary>
             );
         }
 
-        return detail;
+        return <div className={classes.EmployeeDetail}>{detail}</div>;
     }
 }
 

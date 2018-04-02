@@ -28,9 +28,9 @@ class Dashboard extends Component {
 
                 employees = fetchedEmployees.map((employee, i) => {
                     return (
-                        <li>
-                            <Link key={employee.id} to={`/employees/${employee.id}`} details={employee} >
-                                <span>{i + 1}.</span> {employee.name}
+                        <li key={employee.id}>
+                            <Link to={`/employees/${employee.id}`} details={employee} >
+                                 {employee.name}
                             </Link>
                         </li>
                     );

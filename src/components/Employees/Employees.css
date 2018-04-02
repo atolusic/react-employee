@@ -31,8 +31,92 @@
 }
 .Employees .Employees_forms .Employees_forms_right {
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.Employees .EmployeeList {
+.Employees .Employees_forms .Employees_forms_right h3 {
+    font-size: 2.3rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #333;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
+    font-weight: 500;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.Employees .Employees_forms .Employees_forms_right h3::after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 120%;
+    height: .1rem;
+    top: 110%;
+    left: -10%;
+    z-index: 100;
+    background-color: #fff;
+}
+
+.Employees .Employees_forms_right .EmployeeList {
     list-style: none;
+    overflow: auto;
+    font-size: 1.8rem;
+    height: 50%;
+    width: 70%;
+    margin-bottom: 1.5rem;
+}
+
+.SelectedEmployee {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 15%;
+    margin-bottom: 1rem;
+}
+
+.SelectedEmployee p {
+    font-size: 1.6rem;
+    color: #333;
+}
+
+.SelectedEmployee p span {
+    color: #000;
+}
+
+.SelectedEmployee a:link,
+.SelectedEmployee a:visited {
+    text-decoration: none;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    transition: all .2s;
+    padding: .2rem;
+}
+
+.SelectedEmployee a:hover {
+    background-color: #55c57a;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 1rem 2rem rgba(#000, .2);
+}
+
+@media only screen and (max-height: 850px) {
+    .Employees .Employees_forms .Employees_forms_right h3 {
+        font-size: 2rem;
+    }
+
+    .SelectedEmployee {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    .Employees .Employees_forms_right .EmployeeList {
+        width: 90%;
+    }
 }
