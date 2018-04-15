@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { HashRouter } from 'react-router-dom';
 
@@ -9,9 +9,19 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import reducer from './store/reducers/employeesReducer';
+import employeeReducer from './store/reducers/employeesReducer';
+import authReducer from './store/reducers/authReducer';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const rootReducer = combineReducers({
+    employees: employeeReducer,
+    auth: authReducer
+});
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk))
+);
+
 
 const app = (
     <Provider store={store}>

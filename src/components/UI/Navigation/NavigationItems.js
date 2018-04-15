@@ -7,7 +7,7 @@ import Logo from '../Logo/Logo';
 const navigation = (props) => {
     return (
         <ul className={classes.NavigationItems}>
-            <NavigationItem link="/">Dashboard</NavigationItem>
+            <NavigationItem link="/dashboard">Dashboard</NavigationItem>
             <Logo />
             <NavigationItem link="/employees">Employees</NavigationItem>
         </ul>
