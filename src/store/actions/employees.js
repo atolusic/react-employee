@@ -10,8 +10,9 @@ export const setEmployees = (employees) => {
 }
 
 export const initEmployees = () => {
-    return dispatch => {
-        database.ref('employees').once('value')
+    return (dispatch, getState) => {
+        const uid = getState().auth.userId;
+        database.ref(`users/${uid}/employees`).once('value')
             .then(snapshot => {
                 dispatch(setEmployees(snapshot.val()))
             });
@@ -27,8 +28,9 @@ export const addEmployeSucces = (employee, ref) => {
 }
 
 export const addEmployee = (values) => {
-    return dispatch => {
-        database.ref('employees')
+    return (dispatch, getState) => {
+        const uid = getState().auth.userId;
+        database.ref(`users/${uid}/employees`)
             .push(values)
             .then((ref) => dispatch(addEmployeSucces(values, ref))
             );
@@ -43,8 +45,9 @@ export const deleteEmployeSucces = (id) => {
 }
 
 export const deleteEmployee = (id) => {
-    return dispatch => {
-        database.ref(`employees/${id}`)
+    return (dispatch, getState) => {
+        const uid = getState().auth.userId;
+        database.ref(`users/${uid}/employees/${id}`)
             .remove()
             .then(() => dispatch(deleteEmployeSucces(id)))
     }

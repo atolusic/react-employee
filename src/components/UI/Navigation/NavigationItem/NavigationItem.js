@@ -5,7 +5,7 @@ import classes from './NavigationItem.css';
 
 const navigationItem = (props) => {
     return (
-        <li className={classes.NavigationItem}>
+        <li onClick={props.clicked} className={classes.NavigationItem}>
             <NavLink to={props.link}>
                 {props.children}
             </NavLink>

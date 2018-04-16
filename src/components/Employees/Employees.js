@@ -123,7 +123,7 @@ class Employees extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        employees: state.employees
+        employees: state.employees.employees
     }
 }
 

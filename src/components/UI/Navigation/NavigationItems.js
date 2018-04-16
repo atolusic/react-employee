@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import NavigationItem from './NavigationItem/NavigationItem';
 import classes from './NavigationItems.css';
 import Logo from '../Logo/Logo';
+import { startLogout } from '../../../store/actions/auth';
 
 const navigation = (props) => {
     return (
@@ -10,8 +12,9 @@ const navigation = (props) => {
             <NavigationItem link="/dashboard">Dashboard</NavigationItem>
             <Logo />
             <NavigationItem link="/employees">Employees</NavigationItem>
+            <NavigationItem clicked={props.startLogout} link="/">Logout</NavigationItem>
         </ul>
     );
 }
 
-export default navigation;
+export default connect(null, { startLogout })(navigation);
