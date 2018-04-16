@@ -9,6 +9,7 @@ import createHistory from 'history/createBrowserHistory';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+import { login, logout } from './store/actions/auth';
 import employeeReducer from './store/reducers/employeesReducer';
 import authReducer from './store/reducers/authReducer';
 import { firebase } from './firebase/firebase';
@@ -35,11 +36,13 @@ const app = (
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+        store.dispatch(login(user.uid));
         if (history.location.pathname === '/') {
             history.push('/dashboard');
         }
         console.log(user);
     } else {
+        store.dispatch(logout());
         history.push('/');
     }
 })
