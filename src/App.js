@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Employees from './components/Employees/Employees';
 import EmployeeDetail from './components/EmployeeDetail/EmployeeDetail';
 import Auth from './components/Auth/Auth';
+import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
   render() {
@@ -14,12 +15,9 @@ class App extends Component {
       <div>
         <Layout>
           <Switch>
-            <Route exact path="/employees/:id" component={EmployeeDetail} />
-            <Route exact path="/employees" component={Employees} />
-            <Route path="/dashboard" component={Dashboard} />
-            {/* <Route exact path="/" render={() => (
-              <Redirect to="/dashboard" />
-            )} /> */}
+            <PrivateRoute exact path="/employees/:id" component={EmployeeDetail} />
+            <PrivateRoute exact path="/employees" component={Employees} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
             <Route exact path="/" component={Auth} />
           </Switch>
         </Layout>
