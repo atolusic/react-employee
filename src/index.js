@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { HashRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -22,21 +23,24 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk))
 );
 
+const history = createHistory();
 
 const app = (
     <Provider store={store}>
-        <HashRouter>
+        <Router history={history}>
             <App />
-        </HashRouter>
+        </Router>
     </Provider>
 );
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+        if (history.location.pathname === '/') {
+            history.push('/dashboard');
+        }
         console.log(user);
-        console.log('log in');
     } else {
-        console.log('log out');
+        history.push('/');
     }
 })
 

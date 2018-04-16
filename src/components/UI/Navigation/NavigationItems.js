@@ -12,7 +12,7 @@ const navigation = (props) => {
             <NavigationItem link="/dashboard">Dashboard</NavigationItem>
             <Logo />
             <NavigationItem link="/employees">Employees</NavigationItem>
-            <NavigationItem clicked={props.startLogout} link="/">Logout</NavigationItem>
+            <NavigationItem clicked={props.startLogout}>Logout</NavigationItem>
         </ul>
     );
 }
