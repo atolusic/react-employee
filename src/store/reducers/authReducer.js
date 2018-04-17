@@ -7,7 +7,10 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOGIN:
             console.log(action)
             return {
-                uid: action.uid
+                ...state,
+                user: action.user,
+                uid: action.user.uid
+
             };
         case actionTypes.LOGOUT:
             return {

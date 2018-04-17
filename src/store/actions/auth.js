@@ -14,10 +14,10 @@ export const startLogout = () => {
     };
 };
 
-export const login = (uid) => {
+export const login = (user) => {
     return {
         type: actionTypes.LOGIN,
-        uid
+        user
     }
 }
 
