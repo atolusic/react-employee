@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import FormErrors from '../EmployeeForm/FormErrors/FormErrors';
+import classes from './Auth.css';
 import Button from '../UI/Button/Button';
 import { startLogin } from '../../store/actions/auth';
-import Spinner from '../UI/Spinner/Spinner';
 
 class Auth extends Component {
     render() {
         return (
-            <div>
-                <Button clicked={this.props.startLogin}>Log In With Google</Button>
+            <div className={classes.Auth}>
+                <div className={classes.Gradient}></div>
+                <div className={classes.LoginBox}>
+                    <p>Easy company managment | Login with your Google acccount to check all the features.</p>
+                    <div className={classes.LoginButtonWrapper}>
+                        <Button clicked={this.props.startLogin}>Log In With Google</Button>
+                    </div>
+                </div>
             </div>
         );
     }

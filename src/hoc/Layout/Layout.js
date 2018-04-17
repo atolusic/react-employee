@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Auxiliary from '../Auxiliary';
 import Navigation from '../../components/UI/Navigation/NavigationItems';
@@ -7,11 +8,15 @@ const Layout = (props) => {
     return (
         <Auxiliary>
             <main>
-                <Navigation />
+                {props.uid ? <Navigation /> : null}
                 {props.children}
             </main>
         </Auxiliary>
     );
 }
 
-export default Layout;
+const mapStateToProps = state => ({
+    uid: state.auth.uid
+});
+
+export default connect(mapStateToProps)(Layout);

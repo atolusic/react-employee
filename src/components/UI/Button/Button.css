@@ -17,6 +17,7 @@
     background-color: #55c57a;
     color: #fff;
     outline: none;
+    z-index: 200;
 }
 
 .Button::after {
