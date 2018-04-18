@@ -34,17 +34,26 @@ const app = (
     </Provider>
 );
 
+let hasRendered = false;
+const renderApp = () => {
+    if (!hasRendered) {
+        ReactDOM.render(app, document.getElementById('root'));
+        hasRendered = true;
+    }
+};
+
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch(login(user));
+        renderApp();
         if (history.location.pathname === '/') {
             history.push('/dashboard');
         }
     } else {
         store.dispatch(logout());
+        renderApp();
         history.push('/');
     }
 })
 
-ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();

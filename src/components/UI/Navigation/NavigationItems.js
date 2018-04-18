@@ -9,13 +9,15 @@ import { startLogout } from '../../../store/actions/auth';
 const navigation = (props) => {
     return (
         <ul className={classes.NavigationItems}>
-            {console.log(props)}
             <NavigationItem link="/dashboard">Dashboard</NavigationItem>
             <Logo />
             <NavigationItem link="/employees">Employees</NavigationItem>
-            <NavigationItem clicked={props.startLogout}>Logout</NavigationItem>
-            <NavigationItem link="/employees" userPhoto={props.userPhoto}>
-                <img alt="User" src={props.userPhoto}/>
+            <NavigationItem
+                logout={props.startLogout}
+                popup={props.popup}
+                clicked={props.showPopup}
+                userPhoto={props.userPhoto}>
+                <img alt="User" src={props.userPhoto} />
             </NavigationItem>
         </ul>
     );
