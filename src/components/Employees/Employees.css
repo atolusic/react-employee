@@ -1,183 +1,184 @@
 .Employees {
-    display: flex;
-    flex-direction: column;
-    height: 90vh;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  align-items: center;
 }
 
 .Employees h2 {
-    font-size: 3rem;
-    margin: 3rem 0;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    color: #333;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
-    font-weight: 700;
+  font-size: 3rem;
+  margin: 3rem 0;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: #333;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
+  font-weight: 700;
 }
 
 .Employees .Employees_forms {
-    width: 70%;
-    height: 70%;
-    background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.7), rgba(40, 180, 133, 0.7));
-    box-shadow: 0 1rem 2rem rgba(0,0,0,0.4);
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-around;
+  width: 70%;
+  height: 70%;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(126, 213, 111, 0.7),
+    rgba(40, 180, 133, 0.7)
+  );
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .Employees .Employees_forms .Employees_forms_left {
-    width: 50%;
+  width: 50%;
 }
 
 .Employees .Employees_forms .Employees_forms_right {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Employees .Employees_forms .Employees_forms_right h3 {
-    font-size: 2.3rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #333;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
-    font-weight: 500;
-    margin: 2rem 0;
-    position: relative;
+  font-size: 2.3rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #333;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
+  font-weight: 500;
+  margin: 2rem 0;
+  position: relative;
 }
 
 .Employees .Employees_forms .Employees_forms_right h3::after {
-    content: "";
-    position: absolute;
-    display: inline-block;
-    width: 120%;
-    height: .1rem;
-    top: 110%;
-    left: -10%;
-    z-index: 100;
-    background-color: #fff;
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 120%;
+  height: 0.1rem;
+  top: 110%;
+  left: -10%;
+  z-index: 100;
+  background-color: #fff;
 }
 
 .Employees .Employees_forms_right .EmployeeList {
-    list-style: none;
-    overflow: auto;
-    font-size: 1.8rem;
-    height: 50%;
-    width: 70%;
-    margin-bottom: 1.5rem;
+  list-style: none;
+  overflow: auto;
+  font-size: 1.8rem;
+  height: 50%;
+  width: 70%;
+  margin-bottom: 1.5rem;
 }
 
 .SelectedEmployee {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 15%;
-    margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 15%;
+  margin-bottom: 1rem;
 }
 
 .SelectedEmployee p {
-    font-size: 1.6rem;
-    color: #333;
-    padding-right: 2rem;
-    padding-left: 2rem;
+  font-size: 1.6rem;
+  color: #333;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
 .SelectedEmployee p span {
-    color: #000;
+  color: #000;
 }
 
 .SelectedEmployee a:link,
 .SelectedEmployee a:visited {
-    text-decoration: none;
-    margin-top: 1rem;
-    font-size: 1.4rem;
-    color: #fff;
-    border-bottom: 1px solid #fff;
-    transition: all .2s;
-    padding: .2rem;
+  text-decoration: none;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  transition: all 0.2s;
+  padding: 0.2rem;
 }
 
 .SelectedEmployee a:hover {
-    background-color: #55c57a;
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 1rem 2rem rgba(#000, .2);
+  background-color: #55c57a;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 1rem 2rem rgba(#000, 0.2);
 }
 
 @media only screen and (max-height: 850px) {
-    .Employees .Employees_forms .Employees_forms_right h3 {
-        font-size: 2rem;
-    }
+  .Employees .Employees_forms .Employees_forms_right h3 {
+    font-size: 2rem;
+  }
 
-    .SelectedEmployee {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
+  .SelectedEmployee {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media only screen and (max-width: 1366px) {
-    .Employees .Employees_forms_right .EmployeeList {
-        width: 90%;
-    }
+  .Employees .Employees_forms_right .EmployeeList {
+    width: 90%;
+  }
 
-    .SelectedEmployee p {
-        font-size: 1.4rem;
-        border-right: 1px solid #fff;
-    }
+  .SelectedEmployee p {
+    font-size: 1.4rem;
+    border-right: 1px solid #fff;
+  }
 
-    .SelectedEmployee a:link,
-    .SelectedEmployee a:visited {
-        margin: 0;
-        margin-left: 2rem;
-    }
+  .SelectedEmployee a:link,
+  .SelectedEmployee a:visited {
+    margin: 0;
+    margin-left: 2rem;
+  }
 
-    .Employees .Employees_forms {
-        width: 90%;
-    }
+  .Employees .Employees_forms {
+    width: 90%;
+  }
 }
 
 @media only screen and (max-width: 1100px) {
+  .Employees h2 {
+    font-size: 2.5rem;
+    margin: 2rem 0;
+  }
 
-    .Employees h2 {
-        font-size: 2.5rem;
-        margin: 2rem 0;
-    }
+  .Employees .Employees_forms {
+    width: 95%;
+    height: 80%;
+  }
 
-    .Employees .Employees_forms {
-        width: 95%;
-        height: 80%;
-    }
+  .Employees .Employees_forms .Employees_forms_left {
+    width: 45%;
+  }
 
-    .Employees .Employees_forms .Employees_forms_left {
-        width: 45%;
-    }
-
-    .Employees .Employees_forms .Employees_forms_right {
-        width: 55%;
-    }
+  .Employees .Employees_forms .Employees_forms_right {
+    width: 55%;
+  }
 }
 
 @media only screen and (max-width: 1100px) {
+  .SelectedEmployee {
+    flex-direction: column;
+    margin: 2rem 0;
+  }
 
-    .SelectedEmployee {
-        flex-direction: column;
-        margin: 2rem 0;
-    }
+  .SelectedEmployee p {
+    border: none;
+  }
 
-    .SelectedEmployee p {
-        border: none;
-    }
+  .Employees .Employees_forms .Employees_forms_right h3 {
+    margin-bottom: 0.5rem;
+  }
 
-    .Employees .Employees_forms .Employees_forms_right h3 {
-        margin-bottom: .5rem;
-    }
-
-    .SelectedEmployee a:link,
-    .SelectedEmployee a:visited {
-        margin-top: .5rem;
-    }
-
+  .SelectedEmployee a:link,
+  .SelectedEmployee a:visited {
+    margin-top: 0.5rem;
+  }
 }

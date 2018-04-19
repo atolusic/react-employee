@@ -1,23 +1,23 @@
 .Employee {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 5rem;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: color .2s;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  align-items: center;
 }
 
 .Employee:hover {
-    color: #fff;
+  color: #fff;
 }
 
 .Employee button {
-    margin-right: 5rem;
+  margin-right: 5rem;
 }
 
 @media only screen and (max-width: 1366px) {
-    .Employee {
-        font-size: 1.5rem;
-    }
+  .Employee {
+    font-size: 1.5rem;
+  }
 }

@@ -1,35 +1,35 @@
 .AddEmployee {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .AddEmployee h3 {
-    font-size: 2.3rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #333;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
-    font-weight: 500;
-    margin: 2rem 0;
-    position: relative;
+  font-size: 2.3rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #333;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.68);
+  font-weight: 500;
+  margin: 2rem 0;
+  position: relative;
 }
 
 .AddEmployee h3::after {
-    content: "";
-    position: absolute;
-    display: inline-block;
-    width: 120%;
-    height: .1rem;
-    top: 110%;
-    left: -10%;
-    z-index: 100;
-    background-color: #fff;
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 120%;
+  height: 0.1rem;
+  top: 110%;
+  left: -10%;
+  z-index: 100;
+  background-color: #fff;
 }
 
 @media only screen and (max-height: 850px) {
-    .AddEmployee h3 {
-        font-size: 2rem;
-    }
+  .AddEmployee h3 {
+    font-size: 2rem;
+  }
 }

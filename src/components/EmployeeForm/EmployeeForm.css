@@ -1,66 +1,66 @@
 .FormErrors {
-    height: 5rem;
+  height: 5rem;
 }
 
 .EmployeeForm {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .EmployeeForm input {
-    display: block;
-    border: none;
-    border-bottom: 3px solid transparent;
-    background-color: rgba(255, 255, 255, 0.5);
-    width: 50%;
-    height: 5rem;
-    padding: 1rem;
-    border-radius: 2px;
-    transition: all .3s;
+  display: block;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 50%;
+  height: 5rem;
+  padding: 1rem;
+  border-radius: 2px;
+  transition: all 0.3s;
 }
 
 .EmployeeForm input:focus {
-    outline: none;
-    border-bottom: 3px solid #55c57a;
+  outline: none;
+  border-bottom: 3px solid #55c57a;
 }
 .EmployeeForm input:focus:invalid {
-    outline: none;
-    border-bottom: 3px solid #ff7730;
+  outline: none;
+  border-bottom: 3px solid #ff7730;
 }
 
 .EmployeeForm .EmployeeForm_label {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-left: 1rem;
-    margin-top: .25rem;
-    display: block;
-    transition: all .3s;
-    align-self: center;
-    width: 50%;
-    padding: .5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  margin-top: 0.25rem;
+  display: block;
+  transition: all 0.3s;
+  align-self: center;
+  width: 50%;
+  padding: 0.5rem;
 }
 
 .EmployeeForm input:placeholder-shown + .EmployeeForm_label {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4rem);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4rem);
 }
 
 .EmployeeForm .AgeInvalid:focus {
-    border-bottom: 3px solid #ff7730;
+  border-bottom: 3px solid #ff7730;
 }
 
 @media only screen and (max-height: 850px) {
-    .EmployeeForm input {
-        height: 4rem;
-        padding: .5rem;
-    }
+  .EmployeeForm input {
+    height: 4rem;
+    padding: 0.5rem;
+  }
 }
 
 @media only screen and (max-width: 1100px) {
-    .EmployeeForm input {
-        width: 70%;
-    }
+  .EmployeeForm input {
+    width: 70%;
+  }
 }

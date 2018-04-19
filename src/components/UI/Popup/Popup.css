@@ -1,34 +1,35 @@
 .Popup {
-    position: absolute;
-    top: 150%;
-    left: -150%;
-	background: #f7f7f7;
-    border: 4px solid #333;
-    width: 20rem;
-    height: 15rem;
-    z-index: 1000;
-    box-shadow: 0 .5rem .5rem rgba(0,0,0,0.4);
+  position: absolute;
+  top: 150%;
+  left: -150%;
+  background: #f7f7f7;
+  border: 4px solid #333;
+  width: 20rem;
+  height: 15rem;
+  z-index: 1000;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.4);
 }
-.Popup:after, .Popup:before {
-	bottom: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
+.Popup:after,
+.Popup:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
 }
 
 .Popup:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-bottom-color: #f7f7f7;
-	border-width: 20px;
-	margin-left: -20px;
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: #f7f7f7;
+  border-width: 20px;
+  margin-left: -20px;
 }
 .Popup:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-bottom-color: #333;
-	border-width: 26px;
-	margin-left: -26px;
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: #333;
+  border-width: 26px;
+  margin-left: -26px;
 }
