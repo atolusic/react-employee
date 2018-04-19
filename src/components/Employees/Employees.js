@@ -103,9 +103,9 @@ class Employees extends Component {
                             <h3>Employee Details</h3>
                             {employeeDetails}
                             <SearchEmployee
-                            employees={this.props.employees ? false : true}
-                            search={this.state.searchFilter}
-                            searchHandler={this.onSearchHandler} />
+                                employees={this.props.employees ? false : true}
+                                search={this.state.searchFilter}
+                                searchHandler={this.onSearchHandler} />
                             <ul className={classes.EmployeeList}>
                                 {employees}
                             </ul>

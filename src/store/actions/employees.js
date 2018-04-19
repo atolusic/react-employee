@@ -12,7 +12,6 @@ export const setEmployees = (employees) => {
 export const initEmployees = () => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
-        console.log(uid)
         database.ref(`users/${uid}/employees`).once('value')
             .then(snapshot => {
                 dispatch(setEmployees(snapshot.val()))
@@ -70,5 +69,23 @@ export const updateEmployee = (id, updates) => {
             .then(() => {
                 dispatch(updateEmployeeSuccess(id, updates))
             })
+    }
+}
+
+export const addEmployeeDescription = (id, values) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        database.ref(`users/${uid}/employees/${id}`)
+            .update(values)
+            .then(() => dispatch(addEmployeeDescriptionSucces(id, values))
+            );
+    }
+}
+
+export const addEmployeeDescriptionSucces = (id, values) => {
+    return {
+        type: actionTypes.ADD_EMPLOYEE_DESCRIPTION_SUCCESS,
+        id,
+        desc: values.description
     }
 }

@@ -18,7 +18,8 @@ class EmployeeForm extends Component {
         },
         nameValid: false,
         ageValid: true,
-        formValid: false
+        formValid: false,
+        textareaDesc: ''
     }
 
     validateField(fieldName, value) {
@@ -67,7 +68,8 @@ class EmployeeForm extends Component {
 
         let employee = {
             name: this.state.name,
-            age: this.state.age
+            age: this.state.age,
+            description: ''
         }
 
         const id = this.props.id;
@@ -108,6 +110,12 @@ class EmployeeForm extends Component {
                         value={this.state.age}
                         onChange={(e) => this.handleUserInput(e)} />
                     <label htmlFor="age" className={classes.EmployeeForm_label} >Employee Age</label>
+                    {this.props.showDescriptionTextArea  ?
+                            <div>
+                                <textarea onChange={event => this.setState({ textareaDesc: event.target.value })} />
+                                <button type="button" onClick={event => this.props.addDescriptionHandler(this.state.textareaDesc)}>Add</button>
+                            </div>
+                         : null}
                     <Button disabled={!this.state.formValid}>{this.props.add ? 'ADD EMPLOYE' : 'UPDATE'}</Button>
                 </form>
             </Auxiliary>

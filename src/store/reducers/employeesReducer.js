@@ -55,6 +55,18 @@ const reducer = (state = initialState, action) => {
                     [action.id]: {...action.updates}
                 }
             }
+        case actionTypes.ADD_EMPLOYEE_DESCRIPTION_SUCCESS:
+            return {
+                ...state,
+                employees: {
+                    ...state.employees,
+                    [action.id]: {
+                        ...state.employees[action.id],
+                        description: action.desc
+                    }
+                }
+
+            }
         default:
             return state;
     }

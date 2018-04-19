@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import EmployeeForm from '../EmployeeForm/EmployeeForm';
 import Modal from '../UI/Modal/Modal';
-import { initEmployees } from '../../store/actions/employees';
+import { initEmployees, addEmployeeDescription } from '../../store/actions/employees';
 import Spinner from '../UI/Spinner/Spinner';
 import classes from './EmployeeDetail.css';
 import Auxiliary from '../../hoc/Auxiliary';
@@ -13,7 +13,9 @@ class EmployeeDetail extends Component {
 
     state = {
         name: '',
-        age: 18
+        age: 18,
+        description: '',
+        showDescriptionTextArea: false
     }
 
     componentDidMount() {
@@ -33,11 +35,41 @@ class EmployeeDetail extends Component {
         this.setState({[name]: value});
     }
 
+    addDescriptionHandler = (description) => {
+        this.setState({
+            description,
+            showDescriptionTextArea: false
+         }, () => {
+             let description = {
+                 description: this.state.description
+             }
+             this.props.addEmployeeDescription(this.props.match.params.id, description);
+         });
+
+    }
+
     render() {
 
         let detail = <Spinner />
 
         if(this.props.employees) {
+
+            let description = (
+                <div>
+                    { this.props.employees[this.props.match.params.id].description ?
+                        (
+                            <Auxiliary>
+                            {this.props.employees[this.props.match.params.id].description}
+                            <button>Edit Description</button>
+                            </Auxiliary>
+                        ) :
+                        <button
+                            onClick={event => this.setState((prevState) => { return { showDescriptionTextArea: !prevState.showDescriptionTextArea } })}>{this.state.showDescriptionTextArea ? 'Dissmis' : 'Add Description'}
+                        </button>
+                    }
+                </div>
+            );
+
             detail = (
                 <Auxiliary>
                     <Modal show={this.props.show}>Employee details updated successfully!</Modal>
@@ -45,11 +77,15 @@ class EmployeeDetail extends Component {
                         <p><strong>Name:</strong> &nbsp; {this.state.name}</p>
                         <p><strong>Age:</strong> &nbsp; {this.state.age}</p>
                     </div>
+                    <p><strong>Description:</strong> &nbsp; {description}</p>
                     <EmployeeForm
                         id={this.props.match.params.id}
                         updateName={this.props.employees[this.props.match.params.id].name}
                         updateAge={this.props.employees[this.props.match.params.id].age}
-                        detailHandler={this.onDetailChangeHandler} />
+                        detailHandler={this.onDetailChangeHandler}
+                        showDescriptionTextArea={this.state.showDescriptionTextArea}
+                        description={this.state.description}
+                        addDescriptionHandler={this.addDescriptionHandler} />
                 </Auxiliary>
             );
         }
@@ -61,8 +97,8 @@ class EmployeeDetail extends Component {
 const mapStateToProps = (state) => {
     return {
         show: state.showModal,
-        employees: state.employees
+        employees: state.employees.employees
     }
 }
 
-export default withRouter(connect(mapStateToProps, { initEmployees })(EmployeeDetail));
+export default withRouter(connect(mapStateToProps, { initEmployees, addEmployeeDescription })(EmployeeDetail));
