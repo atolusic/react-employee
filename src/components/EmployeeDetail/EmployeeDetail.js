@@ -60,7 +60,7 @@ class EmployeeDetail extends Component {
                         (
                             <Auxiliary>
                             {this.props.employees[this.props.match.params.id].description}
-                            <button>Edit Description</button>
+                            <button onClick={event => this.setState({ showDescriptionTextArea: true })}>Edit Description</button>
                             </Auxiliary>
                         ) :
                         <button
