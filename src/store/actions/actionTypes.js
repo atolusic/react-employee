@@ -10,13 +10,7 @@ export const UPDATE_EMPLOYEE_SUCCESS = "UPDATE_EMPLOYEE_SUCCESS";
 export const ADD_EMPLOYEE_DESCRIPTION_SUCCESS =
   "ADD_EMPLOYEE_DESCRIPTION_SUCCESS";
 
-// export const AUTH_START = 'AUTH_START';
-// export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-// export const AUTH_FAIL = 'AUTH_FAIL';
-// export const AUTH_LOGOUT = 'AUTH_LOGOUT';
-
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
-export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
 export const GET_USER_PHOTO_SUCCESS = "GET_USER_PHOTO_SUCCESS";

@@ -98,21 +98,10 @@ export const addEmployeeDescriptionSucces = (id, values) => {
 export const uploadImage = (id, image) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    firebase
+    return firebase
       .storage()
       .ref(`users/${uid}/employees/${id}`)
-      .put(image)
-      .then(ref => {
-        dispatch(uploadImageSuccess(id, ref.downloadURL));
-      });
-  };
-};
-
-export const uploadImageSuccess = (id, url) => {
-  return {
-    type: actionTypes.UPLOAD_IMAGE,
-    id,
-    url
+      .put(image);
   };
 };
 
