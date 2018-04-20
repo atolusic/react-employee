@@ -113,12 +113,14 @@ class EmployeeDetail extends Component {
             <strong>Description:</strong> &nbsp; {description}
           </p>
           {this.props.employees[this.props.match.params.id].employeePhoto ? (
-            <img
-              alt="user"
-              src={
-                this.props.employees[this.props.match.params.id].employeePhoto
-              }
-            />
+            <div className={classes.EmployeePhotoWrapper}>
+              <img
+                alt="user"
+                src={
+                  this.props.employees[this.props.match.params.id].employeePhoto
+                }
+              />
+            </div>
           ) : (
             img
           )}
