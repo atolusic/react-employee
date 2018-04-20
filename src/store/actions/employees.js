@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 
+import { firebase } from "../../firebase/firebase";
 import database from "../../firebase/firebase";
 
 export const setEmployees = employees => {
@@ -12,7 +13,7 @@ export const setEmployees = employees => {
 export const initEmployees = () => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    database
+    return database
       .ref(`users/${uid}/employees`)
       .once("value")
       .then(snapshot => {
@@ -91,5 +92,47 @@ export const addEmployeeDescriptionSucces = (id, values) => {
     type: actionTypes.ADD_EMPLOYEE_DESCRIPTION_SUCCESS,
     id,
     desc: values.description
+  };
+};
+
+export const uploadImage = (id, image) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    firebase
+      .storage()
+      .ref(`users/${uid}/employees/${id}`)
+      .put(image)
+      .then(ref => {
+        dispatch(uploadImageSuccess(id, ref.downloadURL));
+      });
+  };
+};
+
+export const uploadImageSuccess = (id, url) => {
+  return {
+    type: actionTypes.UPLOAD_IMAGE,
+    id,
+    url
+  };
+};
+
+export const getUserPhoto = id => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    firebase
+      .storage()
+      .ref(`users/${uid}/employees/${id}`)
+      .getDownloadURL()
+      .then(img => {
+        dispatch(getUserPhotoSuccess(id, img));
+      });
+  };
+};
+
+export const getUserPhotoSuccess = (id, imgURL) => {
+  return {
+    type: actionTypes.GET_USER_PHOTO_SUCCESS,
+    id,
+    imgURL
   };
 };

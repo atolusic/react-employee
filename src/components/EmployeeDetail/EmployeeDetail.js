@@ -6,11 +6,13 @@ import EmployeeForm from "../EmployeeForm/EmployeeForm";
 import Modal from "../UI/Modal/Modal";
 import {
   initEmployees,
-  addEmployeeDescription
+  addEmployeeDescription,
+  getUserPhoto
 } from "../../store/actions/employees";
 import Spinner from "../UI/Spinner/Spinner";
 import classes from "./EmployeeDetail.css";
 import Auxiliary from "../../hoc/Auxiliary";
+import UploadImage from "../UploadImage/UploadImage";
 
 class EmployeeDetail extends Component {
   state = {
@@ -21,7 +23,9 @@ class EmployeeDetail extends Component {
   };
 
   componentDidMount() {
-    this.props.initEmployees();
+    this.props.initEmployees().then(() => {
+      this.props.getUserPhoto(this.props.match.params.id);
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -90,6 +94,8 @@ class EmployeeDetail extends Component {
         </div>
       );
 
+      let img = <p>Loading image...</p>;
+
       detail = (
         <Auxiliary>
           <Modal show={this.props.show}>
@@ -106,6 +112,16 @@ class EmployeeDetail extends Component {
           <p>
             <strong>Description:</strong> &nbsp; {description}
           </p>
+          {this.props.employees[this.props.match.params.id].employeePhoto ? (
+            <img
+              alt="user"
+              src={
+                this.props.employees[this.props.match.params.id].employeePhoto
+              }
+            />
+          ) : (
+            img
+          )}
           <EmployeeForm
             id={this.props.match.params.id}
             updateName={this.props.employees[this.props.match.params.id].name}
@@ -115,6 +131,7 @@ class EmployeeDetail extends Component {
             description={this.state.description}
             addDescriptionHandler={this.addDescriptionHandler}
           />
+          <UploadImage id={this.props.match.params.id} />
         </Auxiliary>
       );
     }
@@ -131,7 +148,9 @@ const mapStateToProps = state => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, { initEmployees, addEmployeeDescription })(
-    EmployeeDetail
-  )
+  connect(mapStateToProps, {
+    initEmployees,
+    addEmployeeDescription,
+    getUserPhoto
+  })(EmployeeDetail)
 );

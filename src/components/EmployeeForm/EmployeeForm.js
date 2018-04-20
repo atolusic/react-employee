@@ -75,7 +75,8 @@ class EmployeeForm extends Component {
     let employee = {
       name: this.state.name,
       age: this.state.age,
-      description: ""
+      description: "",
+      employeePhoto: ""
     };
 
     const id = this.props.id;

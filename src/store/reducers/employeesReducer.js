@@ -65,6 +65,29 @@ const reducer = (state = initialState, action) => {
           }
         }
       };
+    case actionTypes.UPLOAD_IMAGE:
+      return {
+        ...state,
+        employees: {
+          ...state.employees,
+          [action.id]: {
+            ...state.employees[action.id],
+            employeePhoto: action.url
+          }
+        }
+      };
+    case actionTypes.GET_USER_PHOTO_SUCCESS:
+      console.log(action);
+      return {
+        ...state,
+        employees: {
+          ...state.employees,
+          [action.id]: {
+            ...state.employees[action.id],
+            employeePhoto: action.imgURL
+          }
+        }
+      };
     default:
       return state;
   }

@@ -17,3 +17,6 @@ export const ADD_EMPLOYEE_DESCRIPTION_SUCCESS =
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
+
+export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
+export const GET_USER_PHOTO_SUCCESS = "GET_USER_PHOTO_SUCCESS";
