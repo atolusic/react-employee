@@ -4,11 +4,39 @@
   margin-left: 5rem;
   margin-bottom: 1rem;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: all 0.1s;
   align-items: center;
+  padding: 0.5rem;
+}
+
+.Employee .NameAndImgWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 30%;
+}
+
+.Employee .NameAndImgWrapper span {
+  margin-left: 0.5rem;
+}
+
+.Employee .NameAndImgWrapper img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  transition: all 0.1s;
 }
 
 .Employee:hover {
+  color: #fff;
+}
+
+.Employee:hover .NameAndImgWrapper img {
+  transform: scale(1.15);
+  color: #fff;
+}
+
+.Employee:hover .NameAndImgWrapper span {
   color: #fff;
 }
 

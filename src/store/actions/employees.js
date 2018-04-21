@@ -123,28 +123,8 @@ export const setEmployeePhoto = id => {
             dispatch(getUserPhotoSuccess(id, photo.employeePhoto));
           });
       });
-
-    // return database
-    //   .ref(`users/${uid}/employees/${id}`)
-    //   .update(img)
-    //   .then(img => {
-    //     dispatch(getUserPhotoSuccess(id, img.employeePhoto));
-    //   });
   };
 };
-
-// export const getUserPhoto = id => {
-//   return (dispatch, getState) => {
-//     const uid = getState().auth.uid;
-//     firebase
-//       .storage()
-//       .ref(`users/${uid}/employees/${id}`)
-//       .getDownloadURL()
-//       .then(img => {
-//         dispatch(getUserPhotoSuccess(id, img));
-//       });
-//   };
-// };
 
 export const getUserPhotoSuccess = (id, imgURL) => {
   return {

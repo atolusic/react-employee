@@ -72,15 +72,27 @@ class EmployeeForm extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    let employee = {
-      name: this.state.name,
-      age: this.state.age,
-      description: "",
-      employeePhoto:
-        "http://www.dewillem.nu/v6/v6vervoer04/images/standaard.gif"
-    };
-
     const id = this.props.id;
+
+    let employee = null;
+
+    if (this.props.employees) {
+      employee = {
+        ...this.props.employees[id],
+        name: this.state.name,
+        age: this.state.age
+      };
+    }
+
+    if (this.props.add) {
+      employee = {
+        name: this.state.name,
+        age: this.state.age,
+        description: "",
+        employeePhoto:
+          "http://www.dewillem.nu/v6/v6vervoer04/images/standaard.gif"
+      };
+    }
 
     if (this.props.add) {
       this.props.addEmployee(employee);
@@ -152,6 +164,12 @@ class EmployeeForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    employees: state.employees.employees
+  };
+};
+
 export default withRouter(
-  connect(null, { addEmployee, updateEmployee })(EmployeeForm)
+  connect(mapStateToProps, { addEmployee, updateEmployee })(EmployeeForm)
 );

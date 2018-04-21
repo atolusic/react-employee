@@ -16,6 +16,12 @@ class UploadImage extends Component {
       snapshot => {
         let percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
         this.setState({ imgUploadProcess: percentage });
+        if (percentage === 100) {
+          setTimeout(() => {
+            this.props.closeUploadImageCtrl();
+            this.setState({ imgUploadProcess: 0 });
+          }, 2000);
+        }
       },
       err => {
         console.log(err);
@@ -40,6 +46,7 @@ class UploadImage extends Component {
         >
           Upload
         </button>
+        <button onClick={this.props.closeUploadImageCtrl}>Close</button>
       </div>
     );
   }

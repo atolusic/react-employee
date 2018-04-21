@@ -10,7 +10,10 @@ const employee = props => {
       className={classes.Employee}
     >
       <span>0{props.empNum} </span>
-      {props.employee.name}
+      <div className={classes.NameAndImgWrapper}>
+        <img src={props.employee.employeePhoto} alt="employee" />
+        <span>{props.employee.name}</span>
+      </div>
       <Button delete={() => props.delete(props.employee)}> X </Button>
     </li>
   );

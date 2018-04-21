@@ -18,14 +18,12 @@ class EmployeeDetail extends Component {
     name: "",
     age: 18,
     description: "",
-    showDescriptionTextArea: false
+    showDescriptionTextArea: false,
+    uploadImageCtrl: false
   };
 
   componentDidMount() {
     this.props.initEmployees();
-    // .then(() => {
-    //   this.props.getUserPhoto(this.props.match.params.id);
-    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,6 +55,10 @@ class EmployeeDetail extends Component {
         );
       }
     );
+  };
+
+  closeUploadImageCtrl = () => {
+    this.setState({ uploadImageCtrl: false });
   };
 
   render() {
@@ -119,14 +121,18 @@ class EmployeeDetail extends Component {
             <strong>Description:</strong> &nbsp; {description}
           </p>
           {this.props.employees[this.props.match.params.id].employeePhoto ? (
-            <div className={classes.EmployeePhotoWrapper}>
+            <figure
+              className={classes.EmployeePhotoWrapper}
+              onClick={event => this.setState({ uploadImageCtrl: true })}
+            >
               <img
                 alt="user"
                 src={
                   this.props.employees[this.props.match.params.id].employeePhoto
                 }
               />
-            </div>
+              <figcaption>Update profile photo</figcaption>
+            </figure>
           ) : (
             img
           )}
@@ -139,7 +145,12 @@ class EmployeeDetail extends Component {
             description={this.state.description}
             addDescriptionHandler={this.addDescriptionHandler}
           />
-          <UploadImage id={this.props.match.params.id} />
+          {this.state.uploadImageCtrl ? (
+            <UploadImage
+              id={this.props.match.params.id}
+              closeUploadImageCtrl={this.closeUploadImageCtrl}
+            />
+          ) : null}
         </Auxiliary>
       );
     }
