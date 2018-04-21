@@ -76,7 +76,8 @@ class EmployeeForm extends Component {
       name: this.state.name,
       age: this.state.age,
       description: "",
-      employeePhoto: ""
+      employeePhoto:
+        "http://www.dewillem.nu/v6/v6vervoer04/images/standaard.gif"
     };
 
     const id = this.props.id;

@@ -6,8 +6,7 @@ import EmployeeForm from "../EmployeeForm/EmployeeForm";
 import Modal from "../UI/Modal/Modal";
 import {
   initEmployees,
-  addEmployeeDescription,
-  getUserPhoto
+  addEmployeeDescription
 } from "../../store/actions/employees";
 import Spinner from "../UI/Spinner/Spinner";
 import classes from "./EmployeeDetail.css";
@@ -23,9 +22,10 @@ class EmployeeDetail extends Component {
   };
 
   componentDidMount() {
-    this.props.initEmployees().then(() => {
-      this.props.getUserPhoto(this.props.match.params.id);
-    });
+    this.props.initEmployees();
+    // .then(() => {
+    //   this.props.getUserPhoto(this.props.match.params.id);
+    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -158,7 +158,6 @@ const mapStateToProps = state => {
 export default withRouter(
   connect(mapStateToProps, {
     initEmployees,
-    addEmployeeDescription,
-    getUserPhoto
+    addEmployeeDescription
   })(EmployeeDetail)
 );

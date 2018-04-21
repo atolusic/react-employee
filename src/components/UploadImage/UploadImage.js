@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { uploadImage, getUserPhoto } from "../../store/actions/employees";
+import { uploadImage, setEmployeePhoto } from "../../store/actions/employees";
+import classes from "./UploadImage.css";
 
 class UploadImage extends Component {
   state = {
@@ -19,8 +20,8 @@ class UploadImage extends Component {
       err => {
         console.log(err);
       },
-      arg => {
-        this.props.getUserPhoto(this.props.id);
+      () => {
+        this.props.setEmployeePhoto(this.props.id);
       }
     );
   };
@@ -44,4 +45,4 @@ class UploadImage extends Component {
   }
 }
 
-export default connect(null, { uploadImage, getUserPhoto })(UploadImage);
+export default connect(null, { uploadImage, setEmployeePhoto })(UploadImage);
