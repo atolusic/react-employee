@@ -8,9 +8,15 @@ class Modal extends Component {
   render() {
     return (
       <Auxiliary>
-        <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
+        <Backdrop
+          show={this.props.show}
+          clicked={this.props.modalClosed}
+          modalForImage={this.props.modalForImage ? true : false}
+        />
         <div
-          className={classes.Modal}
+          className={
+            this.props.modalForImage ? classes.ImgModal : classes.Modal
+          }
           style={{
             transform: this.props.show ? "translateY(0)" : "translateY(-100vh)",
             opacity: this.props.show ? "1" : "0"

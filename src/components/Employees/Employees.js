@@ -95,15 +95,7 @@ class Employees extends Component {
                 src={this.state.selectedEmployee.employeePhoto}
                 alt="user"
               />
-              <Modal show={this.state.showImgModal}>
-                <div>
-                  <img
-                    src={this.state.selectedEmployee.employeePhoto}
-                    alt="user"
-                    style={{ height: "100%", width: "100%" }}
-                  />
-                </div>
-              </Modal>
+
               <div className={classes.SelectedEmployeeText}>
                 <p>
                   <span>Employee Name: </span>
@@ -158,6 +150,37 @@ class Employees extends Component {
             />
           </Modal>
         </div>
+        {this.state.selectedEmployee ? (
+          <Modal
+            show={this.state.showImgModal}
+            modalForImage
+            modalClosed={() => {
+              this.setState({ showImgModal: false });
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+                width: "100%"
+              }}
+            >
+              <img
+                src={this.state.selectedEmployee.employeePhoto}
+                alt="user"
+                style={{
+                  maxHeight: "100%",
+                  maxWidth: "100%",
+                  border: "1px solid #ddd",
+                  borderRadius: "4px",
+                  padding: "5px"
+                }}
+              />
+            </div>
+          </Modal>
+        ) : null}
       </div>
     );
   }
