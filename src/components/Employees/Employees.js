@@ -20,6 +20,7 @@ class Employees extends Component {
     selectedEmployee: null,
     searchFilter: "",
     showModal: false,
+    showImgModal: false,
     readyForDelete: null
   };
 
@@ -87,14 +88,33 @@ class Employees extends Component {
       if (this.props.employees[this.state.selectedEmployee.id]) {
         employeeDetails = (
           <div className={classes.SelectedEmployee}>
-            <p>
-              <span>Employee Name: </span>
-              {this.state.selectedEmployee.name}
-            </p>
-            <p>
-              <span>Employee Age: </span>
-              {this.state.selectedEmployee.age}
-            </p>
+            <div className={classes.SelectedEmployeeDetails}>
+              <img
+                onClick={e => this.setState({ showImgModal: true })}
+                className={classes.SelectedEmployeePhoto}
+                src={this.state.selectedEmployee.employeePhoto}
+                alt="user"
+              />
+              <Modal show={this.state.showImgModal}>
+                <div>
+                  <img
+                    src={this.state.selectedEmployee.employeePhoto}
+                    alt="user"
+                    style={{ height: "100%", width: "100%" }}
+                  />
+                </div>
+              </Modal>
+              <div className={classes.SelectedEmployeeText}>
+                <p>
+                  <span>Employee Name: </span>
+                  {this.state.selectedEmployee.name}
+                </p>
+                <p>
+                  <span>Employee Age: </span>
+                  {this.state.selectedEmployee.age}
+                </p>
+              </div>
+            </div>
             <Link
               to={{
                 pathname: `${this.props.match.path}/${

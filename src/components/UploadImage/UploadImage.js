@@ -18,8 +18,9 @@ class UploadImage extends Component {
         this.setState({ imgUploadProcess: percentage });
         if (percentage === 100) {
           setTimeout(() => {
-            this.props.closeUploadImageCtrl();
-            this.setState({ imgUploadProcess: 0 });
+            this.setState({ imgUploadProcess: 0 }, () => {
+              this.props.closeUploadImageCtrl();
+            });
           }, 2000);
         }
       },

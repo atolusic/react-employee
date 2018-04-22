@@ -80,16 +80,37 @@
   align-items: center;
   height: 15%;
   margin-bottom: 1rem;
+  backface-visibility: hidden;
 }
 
-.SelectedEmployee p {
+.SelectedEmployee .SelectedEmployeeDetails {
+  display: flex;
+  align-items: center;
+  backface-visibility: hidden;
+}
+
+.SelectedEmployee .SelectedEmployeeDetails .SelectedEmployeePhoto {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.4s;
+  border: 1.5px solid #333;
+  backface-visibility: hidden;
+}
+
+.SelectedEmployee .SelectedEmployeeDetails .SelectedEmployeePhoto:hover {
+  transform: translateY(-3px);
+}
+
+.SelectedEmployee .SelectedEmployeeDetails p {
   font-size: 1.6rem;
   color: #333;
   padding-right: 2rem;
   padding-left: 2rem;
 }
 
-.SelectedEmployee p span {
+.SelectedEmployee .SelectedEmployeeDetails p span {
   color: #000;
 }
 

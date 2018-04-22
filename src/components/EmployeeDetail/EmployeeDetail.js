@@ -117,7 +117,7 @@ class EmployeeDetail extends Component {
               <strong>Age:</strong> &nbsp; {this.state.age}
             </p>
             <p>
-              <strong>Gender:</strong> &nbsp;{" "}
+              <strong>Gender:</strong> &nbsp;
               {this.props.employees[this.props.match.params.id].gender}
             </p>
             <div>
