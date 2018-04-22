@@ -7,11 +7,13 @@ import { addEmployee, updateEmployee } from "../../store/actions/employees";
 import FormErrors from "./FormErrors/FormErrors";
 import classes from "./EmployeeForm.css";
 import Button from "../UI/Button/Button";
+import RadioButtons from "../UI/RadioButtons/RadioButtons";
 
 class EmployeeForm extends Component {
   state = {
     name: this.props.add ? "" : this.props.updateName,
     age: this.props.add ? 18 : this.props.updateAge,
+    isMale: this.props.add ? true : null,
     formErrors: {
       name: "",
       age: ""
@@ -69,6 +71,14 @@ class EmployeeForm extends Component {
     });
   }
 
+  onClickChangeGenderHandler = () => {
+    this.setState(prevState => {
+      return {
+        isMale: !prevState.isMale
+      };
+    });
+  };
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -89,8 +99,10 @@ class EmployeeForm extends Component {
         name: this.state.name,
         age: this.state.age,
         description: "",
-        employeePhoto:
-          "http://www.dewillem.nu/v6/v6vervoer04/images/standaard.gif"
+        gender: this.state.isMale ? "M" : "F",
+        employeePhoto: this.state.isMale
+          ? "https://firebasestorage.googleapis.com/v0/b/employee-base.appspot.com/o/gender_photos%2FBusinessman.png?alt=media&token=0843aad9-6531-4384-b25b-3115ec4fe83f"
+          : "https://firebasestorage.googleapis.com/v0/b/employee-base.appspot.com/o/gender_photos%2Fzensko.png?alt=media&token=6bd6ae02-2d7b-4f80-afd8-1b19c66b1f63"
       };
     }
 
@@ -138,6 +150,14 @@ class EmployeeForm extends Component {
           <label htmlFor="age" className={classes.EmployeeForm_label}>
             Employee Age
           </label>
+          {this.props.add ? (
+            <RadioButtons
+              labels={["M", "F"]}
+              radioButtonFor="gender"
+              isMale={this.state.isMale}
+              onClickChangeGenderHandler={this.onClickChangeGenderHandler}
+            />
+          ) : null}
           {this.props.showDescriptionTextArea ? (
             <div>
               <textarea

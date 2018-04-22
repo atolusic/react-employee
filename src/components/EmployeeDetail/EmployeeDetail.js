@@ -69,7 +69,9 @@ class EmployeeDetail extends Component {
         <div>
           {this.props.employees[this.props.match.params.id].description ? (
             <Auxiliary>
-              {this.props.employees[this.props.match.params.id].description}
+              <p>
+                {this.props.employees[this.props.match.params.id].description}
+              </p>
               <button
                 onClick={event =>
                   this.setState(prevState => {
@@ -114,10 +116,14 @@ class EmployeeDetail extends Component {
             <p>
               <strong>Age:</strong> &nbsp; {this.state.age}
             </p>
+            <p>
+              <strong>Gender:</strong> &nbsp;{" "}
+              {this.props.employees[this.props.match.params.id].gender}
+            </p>
+            <div>
+              <strong>Description:</strong> &nbsp; {description}
+            </div>
           </div>
-          <p>
-            <strong>Description:</strong> &nbsp; {description}
-          </p>
           <figure
             className={classes.EmployeePhotoWrapper}
             onClick={event => this.setState({ uploadImageCtrl: true })}
