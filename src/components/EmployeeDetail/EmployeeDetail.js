@@ -109,6 +109,18 @@ class EmployeeDetail extends Component {
           <Modal show={this.props.show}>
             Employee details updated successfully!
           </Modal>
+          <figure
+            className={classes.EmployeePhotoWrapper}
+            onClick={event => this.setState({ uploadImageCtrl: true })}
+          >
+            <img
+              alt="user"
+              src={
+                this.props.employees[this.props.match.params.id].employeePhoto
+              }
+            />
+            <figcaption>Update profile photo</figcaption>
+          </figure>
           <div className={classes.DetailText}>
             <p>
               <strong>Name:</strong> &nbsp; {this.state.name}
@@ -124,18 +136,7 @@ class EmployeeDetail extends Component {
               <strong>Description:</strong> &nbsp; {description}
             </div>
           </div>
-          <figure
-            className={classes.EmployeePhotoWrapper}
-            onClick={event => this.setState({ uploadImageCtrl: true })}
-          >
-            <img
-              alt="user"
-              src={
-                this.props.employees[this.props.match.params.id].employeePhoto
-              }
-            />
-            <figcaption>Update profile photo</figcaption>
-          </figure>
+
           <EmployeeForm
             id={this.props.match.params.id}
             updateName={this.props.employees[this.props.match.params.id].name}
