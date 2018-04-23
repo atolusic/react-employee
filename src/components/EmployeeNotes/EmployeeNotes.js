@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
-import { addNote } from "../../store/actions/notes";
-import database from "../../firebase/firebase";
+import AddEmployeeNote from "./AddEmployeeNote/AddEmployeeNote";
 
 class EmployeeNotes extends Component {
   render() {
@@ -25,4 +23,4 @@ class EmployeeNotes extends Component {
   }
 }
 
-export default connect(null, { addNote })(EmployeeNotes);
+export default EmployeeNotes;
