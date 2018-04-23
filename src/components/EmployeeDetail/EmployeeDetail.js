@@ -12,6 +12,7 @@ import Spinner from "../UI/Spinner/Spinner";
 import classes from "./EmployeeDetail.css";
 import Auxiliary from "../../hoc/Auxiliary";
 import UploadImage from "../UploadImage/UploadImage";
+import EmployeeNotes from "../EmployeeNotes/EmployeeNotes";
 
 class EmployeeDetail extends Component {
   state = {
@@ -146,6 +147,7 @@ class EmployeeDetail extends Component {
             description={this.state.description}
             addDescriptionHandler={this.addDescriptionHandler}
           />
+          <EmployeeNotes id={this.props.match.params.id} />
           {this.state.uploadImageCtrl ? (
             <UploadImage
               id={this.props.match.params.id}

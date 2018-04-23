@@ -14,3 +14,5 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
 export const GET_USER_PHOTO_SUCCESS = "GET_USER_PHOTO_SUCCESS";
+
+export const ADD_NOTE_SUCCESS = "ADD_NOTE_SUCCESS";

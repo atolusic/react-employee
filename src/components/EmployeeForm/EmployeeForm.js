@@ -100,6 +100,7 @@ class EmployeeForm extends Component {
         age: this.state.age,
         description: "",
         gender: this.state.isMale ? "M" : "F",
+        notes: {},
         employeePhoto: this.state.isMale
           ? "https://firebasestorage.googleapis.com/v0/b/employee-base.appspot.com/o/gender_photos%2FBusinessman.png?alt=media&token=0843aad9-6531-4384-b25b-3115ec4fe83f"
           : "https://firebasestorage.googleapis.com/v0/b/employee-base.appspot.com/o/gender_photos%2Fzensko.png?alt=media&token=6bd6ae02-2d7b-4f80-afd8-1b19c66b1f63"
