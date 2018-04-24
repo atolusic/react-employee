@@ -147,7 +147,10 @@ class EmployeeDetail extends Component {
             description={this.state.description}
             addDescriptionHandler={this.addDescriptionHandler}
           />
-          <EmployeeNotes id={this.props.match.params.id} />
+          <EmployeeNotes
+            employee={this.props.employees[this.props.match.params.id]}
+            id={this.props.match.params.id}
+          />
           {this.state.uploadImageCtrl ? (
             <UploadImage
               id={this.props.match.params.id}

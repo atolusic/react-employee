@@ -6,18 +6,7 @@ class EmployeeNotes extends Component {
   render() {
     return (
       <div>
-        <button
-          onClick={e => {
-            const date = new Date()
-              .toUTCString()
-              .split(" ")
-              .slice(0, 5)
-              .join(" ");
-            this.props.addNote(this.props.id, { noteDate: date });
-          }}
-        >
-          KLIK
-        </button>
+        <AddEmployeeNote id={this.props.id} employee={this.props.employee} />
       </div>
     );
   }
