@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import StarRatings from "react-star-ratings";
 
 import EmployeeForm from "../EmployeeForm/EmployeeForm";
 import Modal from "../UI/Modal/Modal";
@@ -20,7 +21,8 @@ class EmployeeDetail extends Component {
     age: 18,
     description: "",
     showDescriptionTextArea: false,
-    uploadImageCtrl: false
+    uploadImageCtrl: false,
+    rating: 0
   };
 
   componentDidMount() {
@@ -60,6 +62,10 @@ class EmployeeDetail extends Component {
 
   closeUploadImageCtrl = () => {
     this.setState({ uploadImageCtrl: false });
+  };
+
+  getRating = overall => {
+    this.setState({ rating: overall });
   };
 
   render() {
@@ -122,6 +128,12 @@ class EmployeeDetail extends Component {
             />
             <figcaption>Update profile photo</figcaption>
           </figure>
+          <StarRatings
+            rating={this.state.rating}
+            starDimension="30px"
+            starSpacing="3px"
+            starRatedColor="#FDE16D"
+          />
           <div className={classes.DetailText}>
             <p>
               <strong>Name:</strong> &nbsp; {this.state.name}
@@ -148,6 +160,7 @@ class EmployeeDetail extends Component {
             addDescriptionHandler={this.addDescriptionHandler}
           />
           <EmployeeNotes
+            getRating={this.getRating}
             employee={this.props.employees[this.props.match.params.id]}
             id={this.props.match.params.id}
           />

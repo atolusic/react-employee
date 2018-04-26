@@ -89,11 +89,15 @@ class addEmployeeNote extends Component {
 
   onSubmit(e, date) {
     e.preventDefault();
-    this.props.addNote(this.props.id, {
+
+    let noteAndRating = {
+      note: this.state.noteInput,
       noteDate: date,
       review: this.state.rateInput
-    });
-    console.log(this.state.rateInput);
+    };
+
+    this.props.addNote(this.props.id, noteAndRating);
+    this.setState({ rateInput: 0 });
   }
 
   render() {
@@ -114,11 +118,12 @@ class addEmployeeNote extends Component {
           </p>
           <label htmlFor="noteInput">Notes</label>
           <textarea name="noteInput" onChange={e => this.handleUserInput(e)} />
-          <label htmlFor="rateInput">Please input number 1-5.</label>
+          <label htmlFor="rateInput">Rate employee 1-5.</label>
           <input
             name="rateInput"
             type="number"
             onChange={e => this.handleUserInput(e)}
+            value={this.state.rateInput}
           />
           <button disabled={!this.state.formValid}>KLIK</button>
         </form>
