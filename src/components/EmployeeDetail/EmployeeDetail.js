@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import StarRatings from "react-star-ratings";
+import { Transition } from "react-transition-group";
 
 import EmployeeForm from "../EmployeeForm/EmployeeForm";
 import Modal from "../UI/Modal/Modal";
@@ -14,6 +15,7 @@ import classes from "./EmployeeDetail.css";
 import Auxiliary from "../../hoc/Auxiliary";
 import UploadImage from "../UploadImage/UploadImage";
 import EmployeeNotes from "../EmployeeNotes/EmployeeNotes";
+import Button from "../UI/Button/Button";
 
 class EmployeeDetail extends Component {
   state = {
@@ -22,7 +24,8 @@ class EmployeeDetail extends Component {
     description: "",
     showDescriptionTextArea: false,
     uploadImageCtrl: false,
-    rating: 0
+    rating: 0,
+    showNotes: false
   };
 
   componentDidMount() {
@@ -146,10 +149,14 @@ class EmployeeDetail extends Component {
               {this.props.employees[this.props.match.params.id].gender}
             </p>
             <div>
+              {/* <EmployeeNotes
+                getRating={this.getRating}
+                employee={this.props.employees[this.props.match.params.id]}
+                id={this.props.match.params.id}
+              /> */}
               <strong>Description:</strong> &nbsp; {description}
             </div>
           </div>
-
           <EmployeeForm
             id={this.props.match.params.id}
             updateName={this.props.employees[this.props.match.params.id].name}
@@ -159,11 +166,31 @@ class EmployeeDetail extends Component {
             description={this.state.description}
             addDescriptionHandler={this.addDescriptionHandler}
           />
-          <EmployeeNotes
-            getRating={this.getRating}
-            employee={this.props.employees[this.props.match.params.id]}
-            id={this.props.match.params.id}
-          />
+          <Transition in={this.state.showNotes} timeout={2000}>
+            {state => (
+              <div
+                style={{
+                  background: "red",
+                  width: "100px",
+                  height: "100px",
+                  transition: "all 2s ease",
+                  opacity: state === "exited" || state === "exiting" ? 0 : 1
+                }}
+              >
+                {state}
+              </div>
+            )}
+          </Transition>
+          <Button
+            clicked={e =>
+              this.setState(prevState => {
+                return { showNotes: !prevState.showNotes };
+              })
+            }
+          >
+            {this.state.showNotes ? "Hide" : "Show Notes"}
+          </Button>
+
           {this.state.uploadImageCtrl ? (
             <UploadImage
               id={this.props.match.params.id}
