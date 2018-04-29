@@ -1,0 +1,7 @@
+.EmployeeNotes {
+  visibility: hidden;
+}
+
+.EmployeeNotesVisible {
+  visibility: visible;
+}

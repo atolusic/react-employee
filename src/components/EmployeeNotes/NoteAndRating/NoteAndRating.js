@@ -12,6 +12,7 @@ const NotesAndRatings = props => {
         starSpacing="1px"
         starRatedColor="#FDE16D"
       />
+      <button>Edit</button>
     </li>
   );
 };

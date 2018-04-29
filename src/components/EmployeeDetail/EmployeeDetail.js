@@ -149,11 +149,6 @@ class EmployeeDetail extends Component {
               {this.props.employees[this.props.match.params.id].gender}
             </p>
             <div>
-              {/* <EmployeeNotes
-                getRating={this.getRating}
-                employee={this.props.employees[this.props.match.params.id]}
-                id={this.props.match.params.id}
-              /> */}
               <strong>Description:</strong> &nbsp; {description}
             </div>
           </div>
@@ -166,18 +161,19 @@ class EmployeeDetail extends Component {
             description={this.state.description}
             addDescriptionHandler={this.addDescriptionHandler}
           />
-          <Transition in={this.state.showNotes} timeout={2000}>
+          <Transition in={this.state.showNotes} timeout={1000}>
             {state => (
               <div
-                style={{
-                  background: "red",
-                  width: "100px",
-                  height: "100px",
-                  transition: "all 2s ease",
-                  opacity: state === "exited" || state === "exiting" ? 0 : 1
-                }}
+                className={`${classes.Square} ${classes[this.state.showNotes]}`}
               >
-                {state}
+                <EmployeeNotes
+                  toggleVisibility={
+                    state === "entering" || state === "entered" ? true : false
+                  }
+                  getRating={this.getRating}
+                  employee={this.props.employees[this.props.match.params.id]}
+                  id={this.props.match.params.id}
+                />
               </div>
             )}
           </Transition>
@@ -188,7 +184,7 @@ class EmployeeDetail extends Component {
               })
             }
           >
-            {this.state.showNotes ? "Hide" : "Show Notes"}
+            {this.state.showNotes ? "Hide" : "Show Notes And Rates"}
           </Button>
 
           {this.state.uploadImageCtrl ? (
