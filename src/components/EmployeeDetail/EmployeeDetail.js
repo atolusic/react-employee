@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import StarRatings from "react-star-ratings";
-import { Transition } from "react-transition-group";
 
 import EmployeeForm from "../EmployeeForm/EmployeeForm";
 import Modal from "../UI/Modal/Modal";
@@ -73,6 +72,7 @@ class EmployeeDetail extends Component {
 
   render() {
     let detail = <Spinner />;
+    const { showNotes } = this.state;
 
     if (this.props.employees) {
       let description = (
@@ -161,22 +161,12 @@ class EmployeeDetail extends Component {
             description={this.state.description}
             addDescriptionHandler={this.addDescriptionHandler}
           />
-          <Transition in={this.state.showNotes} timeout={1000}>
-            {state => (
-              <div
-                className={`${classes.Square} ${classes[this.state.showNotes]}`}
-              >
-                <EmployeeNotes
-                  toggleVisibility={
-                    state === "entering" || state === "entered" ? true : false
-                  }
-                  getRating={this.getRating}
-                  employee={this.props.employees[this.props.match.params.id]}
-                  id={this.props.match.params.id}
-                />
-              </div>
-            )}
-          </Transition>
+          <EmployeeNotes
+            showNotes={showNotes}
+            getRating={this.getRating}
+            employee={this.props.employees[this.props.match.params.id]}
+            id={this.props.match.params.id}
+          />
           <Button
             clicked={e =>
               this.setState(prevState => {

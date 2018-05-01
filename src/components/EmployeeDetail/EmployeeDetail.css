@@ -74,18 +74,3 @@
 .EmployeeDetail .DetailText strong {
   color: #333;
 }
-
-.Square {
-  background: steelblue;
-  height: 0;
-  width: auto;
-  transition: all 1s;
-}
-
-.Square.false {
-  height: 0;
-}
-
-.Square.true {
-  height: 100px;
-}

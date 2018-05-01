@@ -1,7 +1,8 @@
 .EmployeeNotes {
-  visibility: hidden;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  max-height: 0;
 }
-
-.EmployeeNotesVisible {
-  visibility: visible;
+.EmployeeNotesExpanded {
+  max-height: 20rem;
 }
