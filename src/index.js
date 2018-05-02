@@ -48,7 +48,11 @@ firebase.auth().onAuthStateChanged(user => {
   if (user) {
     store.dispatch(login(user));
     renderApp();
-    if (history.location.pathname === "/") {
+    if (
+      history.location.pathname === "/" ||
+      store.getState().company === undefined ||
+      history.location.pathname !== "/profile"
+    ) {
       history.push("/dashboard");
     }
   } else {

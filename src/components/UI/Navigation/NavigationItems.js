@@ -11,7 +11,9 @@ const navigation = props => {
     <ul className={classes.NavigationItems}>
       <NavigationItem link="/dashboard">Dashboard</NavigationItem>
       <Logo />
-      <NavigationItem link="/employees">Employees</NavigationItem>
+      <NavigationItem link="/employees" disabled={true}>
+        Employees
+      </NavigationItem>
       <NavigationItem
         logout={props.startLogout}
         popup={props.popup}

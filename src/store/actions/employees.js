@@ -3,6 +3,10 @@ import * as actionTypes from "./actionTypes";
 import { firebase } from "../../firebase/firebase";
 import database from "../../firebase/firebase";
 
+export const createCompany = companyDetails => {};
+
+export const createCompanySuccess = (companyDetails, ref) => {};
+
 export const setEmployees = employees => {
   return {
     type: actionTypes.SET_EMPLOYEES,

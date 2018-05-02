@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 
+import Button from "../UI/Button/Button";
 import { initEmployees } from "../../store/actions/employees";
 import Spinner from "../UI/Spinner/Spinner";
 import classes from "./Dashboard.css";
+import MapComponent from "../UI/MapComponent/MapComponenet";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -37,10 +39,27 @@ class Dashboard extends Component {
     }
 
     return (
-      <div className={classes.Dashboard}>
-        <h2>Top Employees</h2>
-        <NavLink to="/employees" />
-        <ul>{employees}</ul>
+      <div>
+        <div className={classes.Dashboard}>
+          {this.props.company ? (
+            <div>
+              <h2>Top Employees</h2>
+              <NavLink to="/employees" />
+              <ul>{employees}</ul>
+              <MapComponent
+                isMarkerShown
+                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `400px` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+              />
+            </div>
+          ) : (
+            <div className={classes.DashboardCreateButtonWrapper}>
+              <Button>Create company</Button>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

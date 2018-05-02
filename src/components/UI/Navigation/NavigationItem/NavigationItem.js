@@ -7,6 +7,7 @@ import Popup from "../../../UI/Popup/Popup";
 const navigationItem = props => {
   return (
     <li
+      style={props.disabled ? { pointerEvents: "none", opacity: 0.3 } : null}
       onClick={props.clicked}
       className={
         props.userPhoto ? classes.NavigationItemPhoto : classes.NavigationItem
