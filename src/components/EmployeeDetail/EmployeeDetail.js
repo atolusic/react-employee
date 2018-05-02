@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 
-import EmployeeForm from "../EmployeeForm/EmployeeForm";
+import EmployeeForm from "../UI/Forms/EmployeeForm/EmployeeForm";
 import Modal from "../UI/Modal/Modal";
 import {
   initEmployees,

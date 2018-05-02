@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import Auxiliary from "../../hoc/Auxiliary";
-import { addEmployee, updateEmployee } from "../../store/actions/employees";
+import Auxiliary from "../../../../hoc/Auxiliary";
+import {
+  addEmployee,
+  updateEmployee
+} from "../../../../store/actions/employees";
 import FormErrors from "./FormErrors/FormErrors";
 import classes from "./EmployeeForm.css";
-import Button from "../UI/Button/Button";
-import RadioButtons from "../UI/RadioButtons/RadioButtons";
+import Button from "../../../UI/Button/Button";
+import RadioButtons from "../../../UI/RadioButtons/RadioButtons";
 
 class EmployeeForm extends Component {
   state = {

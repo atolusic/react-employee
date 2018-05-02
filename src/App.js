@@ -9,6 +9,7 @@ import EmployeeDetail from "./components/EmployeeDetail/EmployeeDetail";
 import Auth from "./components/Auth/Auth";
 import Profile from "./components/Profile/Profile";
 import PrivateRoute from "./PrivateRoute";
+import CompanyForm from "./components/UI/Forms/CompanyForm/CompanyForm";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
               component={EmployeeDetail}
             />
             <PrivateRoute exact path="/employees" component={Employees} />
+            <PrivateRoute path="/dashboard/create" component={CompanyForm} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/profile" component={Profile} />
             <Route exact path="/" component={Auth} />

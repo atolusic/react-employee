@@ -14,6 +14,8 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { history, location } = this.props;
+
     let employees = <Spinner />;
 
     if (this.props.employees) {
@@ -56,7 +58,11 @@ class Dashboard extends Component {
             </div>
           ) : (
             <div className={classes.DashboardCreateButtonWrapper}>
-              <Button>Create company</Button>
+              <Button
+                clicked={() => history.push(`${location.pathname}/create`)}
+              >
+                Create company
+              </Button>
             </div>
           )}
         </div>

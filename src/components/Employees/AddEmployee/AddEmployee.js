@@ -1,6 +1,6 @@
 import React from "react";
 
-import EmployeeForm from "../../EmployeeForm/EmployeeForm";
+import EmployeeForm from "../../UI/Forms/EmployeeForm/EmployeeForm";
 import classes from "./AddEmployee.css";
 
 const addEmployee = props => {
