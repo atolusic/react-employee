@@ -35,6 +35,22 @@ class CompanyForm extends Component {
     };
   }
 
+  inputChangedHandler = (event, type) => {
+    const value = event.target.value;
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        companyForm: {
+          ...prevState.companyForm,
+          [type]: {
+            ...prevState.companyForm[type],
+            value
+          }
+        }
+      };
+    });
+  };
+
   render() {
     const { companyForm } = this.state;
     const formElementsArray = [];
@@ -50,6 +66,7 @@ class CompanyForm extends Component {
             elementType={el.config.elementType}
             elementConfig={el.config.elementConfig}
             value={el.config.value}
+            changed={e => this.inputChangedHandler(e, el.id)}
           />
         ))}
       </form>
