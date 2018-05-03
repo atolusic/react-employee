@@ -3,9 +3,42 @@ import * as actionTypes from "./actionTypes";
 import { firebase } from "../../firebase/firebase";
 import database from "../../firebase/firebase";
 
-export const createCompany = companyDetails => {};
+export const createCompany = companyDetails => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database
+      .ref(`users/${uid}/company`)
+      .push(companyDetails)
+      .then(ref => dispatch(createCompanySuccess(companyDetails, ref)));
+  };
+};
 
-export const createCompanySuccess = (companyDetails, ref) => {};
+export const createCompanySuccess = (companyDetails, ref) => {
+  return {
+    type: actionTypes.CREATE_COMPANY_SUCCESS,
+    companyDetails,
+    ref
+  };
+};
+
+export const initCompany = () => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database
+      .ref(`users/${uid}/company`)
+      .once("value")
+      .then(snapshot => {
+        dispatch(setEmployees(snapshot.val()));
+      });
+  };
+};
+
+export const setCompany = company => {
+  return {
+    type: actionTypes.SET_COMPANY,
+    company
+  };
+};
 
 export const setEmployees = employees => {
   return {

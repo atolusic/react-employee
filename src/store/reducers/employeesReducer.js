@@ -1,24 +1,37 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  employees: null,
+  company: null,
   showModal: false
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.SET_COMPANY:
+      return {
+        ...state,
+        company: {
+          ...action.company
+        }
+      };
     case actionTypes.SET_EMPLOYEES:
       return {
         ...state,
-        employees: action.employees,
+        company: {
+          ...state.company,
+          employees: action.employees
+        },
         showModal: false
       };
     case actionTypes.ADD_EMPLOYEE_SUCCESS:
       return {
         ...state,
-        employees: {
-          ...state.employees,
-          [action.ref.key]: { ...action.employeeData }
+        company: {
+          ...state.company,
+          employees: {
+            ...state.employees,
+            [action.ref.key]: { ...action.employeeData }
+          }
         }
       };
     case actionTypes.DELETE_EMPLOYEE_SUCCESS:
@@ -87,6 +100,17 @@ const reducer = (state = initialState, action) => {
               ...state.employees[action.id].notes,
               [action.ref.key]: { ...action.values }
             }
+          }
+        }
+      };
+    case actionTypes.CREATE_COMPANY_SUCCESS:
+      return {
+        ...state,
+        company: {
+          ...state.company,
+          [action.ref.key]: {
+            ...action.companyDetails,
+            companyId: action.ref.key
           }
         }
       };
