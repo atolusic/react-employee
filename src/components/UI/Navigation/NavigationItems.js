@@ -7,11 +7,13 @@ import Logo from "../Logo/Logo";
 import { startLogout } from "../../../store/actions/auth";
 
 const navigation = props => {
+  const { company } = props;
+
   return (
     <ul className={classes.NavigationItems}>
       <NavigationItem link="/dashboard">Dashboard</NavigationItem>
       <Logo />
-      <NavigationItem link="/employees" disabled={true}>
+      <NavigationItem link="/employees" disabled={company ? false : true}>
         Employees
       </NavigationItem>
       <NavigationItem
@@ -27,7 +29,8 @@ const navigation = props => {
 };
 
 const mapStateToProps = state => ({
-  userPhoto: state.auth.user.photoURL
+  userPhoto: state.auth.user.photoURL,
+  company: state.employees.company
 });
 
 export default connect(mapStateToProps, { startLogout })(navigation);

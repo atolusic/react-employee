@@ -28,14 +28,25 @@ export const initCompany = () => {
       .ref(`users/${uid}/company`)
       .once("value")
       .then(snapshot => {
-        dispatch(setEmployees(snapshot.val()));
+        if (snapshot.val()) {
+          return dispatch(initCompanySuccess(snapshot.val()));
+        } else {
+          return dispatch(showCreateButton());
+        }
       });
   };
 };
 
-export const setCompany = company => {
+export const showCreateButton = () => {
   return {
-    type: actionTypes.SET_COMPANY,
+    type: actionTypes.SHOW_CREATE_BUTTON,
+    showCreateButton: true
+  };
+};
+
+export const initCompanySuccess = company => {
+  return {
+    type: actionTypes.INIT_COMPANY_SUCCESS,
     company
   };
 };

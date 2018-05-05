@@ -3,22 +3,42 @@ import { connect } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 
 import Button from "../UI/Button/Button";
-import { initEmployees } from "../../store/actions/employees";
+import { initCompany } from "../../store/actions/employees";
 import Spinner from "../UI/Spinner/Spinner";
 import classes from "./Dashboard.css";
 import MapComponent from "../UI/MapComponent/MapComponenet";
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.initEmployees();
+    this.props.initCompany();
   }
 
   render() {
-    const { history, location } = this.props;
+    const { history, location, company, showCreateButton } = this.props;
 
-    let employees = <Spinner />;
+    let companyData = <Spinner />;
 
-    if (this.props.employees) {
+    if (company) {
+      let companyObj = company[Object.keys(company)[0]];
+      companyData = (
+        <div>
+          <h2>{companyObj.name}</h2>
+          <MapComponent
+            isMarkerShown
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
+        </div>
+      );
+    }
+
+    /////////////////////////////////
+    /////* EMPLOYEES STRUCTURE */////
+    ////////////////////////////////
+
+    /* if (this.props.employees) {
       const fetchedEmployees = [];
       for (let employee in this.props.employees) {
         fetchedEmployees.push({
@@ -38,34 +58,19 @@ class Dashboard extends Component {
           );
         })
         .slice(0, 5);
-    }
+    } */
 
     return (
-      <div>
-        <div className={classes.Dashboard}>
-          {this.props.company ? (
-            <div>
-              <h2>Top Employees</h2>
-              <NavLink to="/employees" />
-              <ul>{employees}</ul>
-              <MapComponent
-                isMarkerShown
-                googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `400px` }} />}
-                mapElement={<div style={{ height: `100%` }} />}
-              />
-            </div>
-          ) : (
-            <div className={classes.DashboardCreateButtonWrapper}>
-              <Button
-                clicked={() => history.push(`${location.pathname}/create`)}
-              >
-                Create company
-              </Button>
-            </div>
-          )}
-        </div>
+      <div className={classes.Dashboard}>
+        {showCreateButton ? (
+          <div className={classes.DashboardCreateButtonWrapper}>
+            <Button clicked={() => history.push(`${location.pathname}/create`)}>
+              Create company
+            </Button>
+          </div>
+        ) : (
+          companyData
+        )}
       </div>
     );
   }
@@ -73,8 +78,9 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    employees: state.employees.employees
+    company: state.employees.company,
+    showCreateButton: state.employees.showCreateButton
   };
 };
 
-export default connect(mapStateToProps, { initEmployees })(Dashboard);
+export default connect(mapStateToProps, { initCompany })(Dashboard);

@@ -2,21 +2,29 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   company: null,
-  showModal: false
+  showModal: false,
+  showCreateButton: false
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SET_COMPANY:
+    case actionTypes.INIT_COMPANY_SUCCESS:
       return {
         ...state,
+        showCreateButton: false,
         company: {
           ...action.company
         }
       };
+    case actionTypes.SHOW_CREATE_BUTTON:
+      return {
+        ...state,
+        showCreateButton: action.showCreateButton
+      };
     case actionTypes.SET_EMPLOYEES:
       return {
         ...state,
+        // employees: { ...action.employees },
         company: {
           ...state.company,
           employees: action.employees
