@@ -13,7 +13,7 @@ const navigation = props => {
     <ul className={classes.NavigationItems}>
       <NavigationItem link="/dashboard">Dashboard</NavigationItem>
       <Logo />
-      <NavigationItem link="/employees" disabled={company ? false : true}>
+      <NavigationItem link="/employees" disabled={company.name ? false : true}>
         Employees
       </NavigationItem>
       <NavigationItem

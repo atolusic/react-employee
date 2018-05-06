@@ -1,7 +1,13 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  company: null,
+  company: {
+    name: "",
+    location: "",
+    email: "",
+    description: "",
+    employees: null
+  },
   showModal: false,
   showCreateButton: false
 };
@@ -12,7 +18,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         showCreateButton: false,
+        showModal: false,
         company: {
+          ...state.company,
           ...action.company
         }
       };
@@ -36,26 +44,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         company: {
           ...state.company,
-          [action.companyId]: {
-            ...state.company[action.companyId],
-            employees: {
-              ...state.company[action.companyId].employees,
-              [action.ref.key]: { ...action.employeeData }
-            }
+          employees: {
+            ...state.company.employees,
+            [action.ref.key]: { ...action.employeeData }
           }
         }
       };
     case actionTypes.DELETE_EMPLOYEE_SUCCESS:
       const emp = [];
-      const companyEmployees = state.company[action.companyId].employees;
-      for (let employee in companyEmployees) {
+      const companyEmployees = state.company.employees;
+      for (let employee in state.company.employees) {
         emp.push({
           ...companyEmployees[employee],
           id: employee
         });
       }
-
-      console.log(emp);
 
       const newEmp = emp.filter(employee => employee.id !== action.id);
 
@@ -71,7 +74,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         company: {
-          ...state.company[action.companyId],
+          ...state.company,
           employees
         }
       };
@@ -79,9 +82,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         showModal: true,
-        employees: {
-          ...state.employees,
-          [action.id]: { ...action.updates }
+        company: {
+          ...state.company,
+          employees: {
+            ...state.company.employees,
+            [action.id]: { ...action.updates }
+          }
         }
       };
     case actionTypes.ADD_EMPLOYEE_DESCRIPTION_SUCCESS:
@@ -124,10 +130,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         company: {
-          ...state.company,
-          [action.ref.key]: {
-            ...action.companyDetails
-          }
+          ...action.companyDetails
         }
       };
     default:

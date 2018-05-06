@@ -85,13 +85,13 @@ class EmployeeForm extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const id = this.props.id;
+    const { id, employees } = this.props;
 
     let employee = null;
 
-    if (this.props.employees) {
+    if (employees) {
       employee = {
-        ...this.props.employees[id],
+        ...employees[id],
         name: this.state.name,
         age: this.state.age
       };
@@ -194,7 +194,7 @@ class EmployeeForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    employees: state.employees.employees
+    employees: state.employees.company.employees
   };
 };
 

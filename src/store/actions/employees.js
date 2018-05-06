@@ -8,18 +8,16 @@ export const createCompany = companyDetails => {
     const uid = getState().auth.uid;
     return database
       .ref(`users/${uid}`)
-      .child("compnay")
-      .set(companyDetails);
-    // .push(companyDetails)
-    // .then(ref => dispatch(createCompanySuccess(companyDetails, ref)));
+      .child("company")
+      .set(companyDetails)
+      .then(() => dispatch(createCompanySuccess(companyDetails)));
   };
 };
 
-export const createCompanySuccess = (companyDetails, ref) => {
+export const createCompanySuccess = companyDetails => {
   return {
     type: actionTypes.CREATE_COMPANY_SUCCESS,
-    companyDetails,
-    ref
+    companyDetails
   };
 };
 
@@ -84,32 +82,27 @@ export const addEmployeSucces = (employee, ref, companyId) => {
 export const addEmployee = values => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const companyState = getState().employees.company;
-    const companyId = Object.keys(companyState)[0];
     database
-      .ref(`users/${uid}/company/${companyId}/employees`)
+      .ref(`users/${uid}/company/employees`)
       .push(values)
-      .then(ref => dispatch(addEmployeSucces(values, ref, companyId)));
+      .then(ref => dispatch(addEmployeSucces(values, ref)));
   };
 };
 
-export const deleteEmployeSucces = (id, companyId) => {
+export const deleteEmployeSuccess = id => {
   return {
     type: actionTypes.DELETE_EMPLOYEE_SUCCESS,
-    id,
-    companyId
+    id
   };
 };
 
 export const deleteEmployee = id => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const companyState = getState().employees.company;
-    const companyId = Object.keys(companyState)[0];
     database
-      .ref(`users/${uid}/company/${companyId}/employees/${id}`)
+      .ref(`users/${uid}/company/employees/${id}`)
       .remove()
-      .then(() => dispatch(deleteEmployeSucces(id, companyId)));
+      .then(() => dispatch(deleteEmployeSuccess(id)));
   };
 };
 
@@ -125,7 +118,7 @@ export const updateEmployee = (id, updates) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
     database
-      .ref(`users/${uid}/employees/${id}`)
+      .ref(`users/${uid}/company/employees/${id}`)
       .update(updates)
       .then(() => {
         dispatch(updateEmployeeSuccess(id, updates));

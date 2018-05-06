@@ -17,11 +17,10 @@ class Dashboard extends Component {
 
     let companyData = <Spinner />;
 
-    if (company) {
-      let companyObj = company[Object.keys(company)[0]];
+    if (company.name !== "") {
       companyData = (
         <div>
-          <h2>{companyObj.name}</h2>
+          <h2>{company.name}</h2>
           <MapComponent
             isMarkerShown
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"

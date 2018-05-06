@@ -6,7 +6,7 @@ import StarRatings from "react-star-ratings";
 import EmployeeForm from "../UI/Forms/EmployeeForm/EmployeeForm";
 import Modal from "../UI/Modal/Modal";
 import {
-  initEmployees,
+  initCompany,
   addEmployeeDescription
 } from "../../store/actions/employees";
 import Spinner from "../UI/Spinner/Spinner";
@@ -28,7 +28,7 @@ class EmployeeDetail extends Component {
   };
 
   componentDidMount() {
-    this.props.initEmployees();
+    this.props.initCompany();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,15 +73,14 @@ class EmployeeDetail extends Component {
   render() {
     let detail = <Spinner />;
     const { showNotes } = this.state;
+    const { employees } = this.props;
 
-    if (this.props.employees) {
+    if (employees) {
       let description = (
         <div>
-          {this.props.employees[this.props.match.params.id].description ? (
+          {employees[this.props.match.params.id].description ? (
             <Auxiliary>
-              <p>
-                {this.props.employees[this.props.match.params.id].description}
-              </p>
+              <p>{employees[this.props.match.params.id].description}</p>
               <button
                 onClick={event =>
                   this.setState(prevState => {
@@ -125,9 +124,7 @@ class EmployeeDetail extends Component {
           >
             <img
               alt="user"
-              src={
-                this.props.employees[this.props.match.params.id].employeePhoto
-              }
+              src={employees[this.props.match.params.id].employeePhoto}
             />
             <figcaption>Update profile photo</figcaption>
           </figure>
@@ -146,7 +143,7 @@ class EmployeeDetail extends Component {
             </p>
             <p>
               <strong>Gender:</strong> &nbsp;
-              {this.props.employees[this.props.match.params.id].gender}
+              {employees[this.props.match.params.id].gender}
             </p>
             <div>
               <strong>Description:</strong> &nbsp; {description}
@@ -154,8 +151,8 @@ class EmployeeDetail extends Component {
           </div>
           <EmployeeForm
             id={this.props.match.params.id}
-            updateName={this.props.employees[this.props.match.params.id].name}
-            updateAge={this.props.employees[this.props.match.params.id].age}
+            updateName={employees[this.props.match.params.id].name}
+            updateAge={employees[this.props.match.params.id].age}
             detailHandler={this.onDetailChangeHandler}
             showDescriptionTextArea={this.state.showDescriptionTextArea}
             description={this.state.description}
@@ -164,7 +161,7 @@ class EmployeeDetail extends Component {
           <EmployeeNotes
             showNotes={showNotes}
             getRating={this.getRating}
-            employee={this.props.employees[this.props.match.params.id]}
+            employee={employees[this.props.match.params.id]}
             id={this.props.match.params.id}
           />
           <Button
@@ -193,14 +190,14 @@ class EmployeeDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    show: state.showModal,
-    employees: state.employees.employees
+    show: state.employees.showModal,
+    employees: state.employees.company.employees
   };
 };
 
 export default withRouter(
   connect(mapStateToProps, {
-    initEmployees,
+    initCompany,
     addEmployeeDescription
   })(EmployeeDetail)
 );

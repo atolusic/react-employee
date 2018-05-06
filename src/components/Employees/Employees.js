@@ -50,22 +50,18 @@ class Employees extends Component {
   };
 
   render() {
-    let employees = <Spinner />;
+    const { employees } = this.props;
+    let companyEmployees = <Spinner />;
 
-    let companyEmployees = null;
-
-    if (this.props.company) {
-      const { company } = this.props;
-      companyEmployees = company[Object.keys(company)[0]].employees;
+    if (employees) {
       const fetchedEmployees = [];
-      for (let employee in companyEmployees) {
+      for (let employee in employees) {
         fetchedEmployees.push({
-          ...companyEmployees[employee],
+          ...employees[employee],
           id: employee
         });
       }
-
-      employees = fetchedEmployees
+      companyEmployees = fetchedEmployees
         .map((employee, i) => {
           return (
             <Employee
@@ -82,54 +78,53 @@ class Employees extends Component {
             .toLowerCase()
             .includes(this.state.searchFilter);
         });
-      console.log(fetchedEmployees);
     }
 
-    // let employeeDetails = companyEmployees ? (
-    //   <p className={classes.SelectedEmployee}>Click on employee for details!</p>
-    // ) : null;
+    let employeeDetails = employees ? (
+      <p className={classes.SelectedEmployee}>Click on employee for details!</p>
+    ) : null;
 
-    // if (this.state.selectedEmployee) {
-    //   if (companyEmployees[this.state.selectedEmployee.id]) {
-    //     employeeDetails = (
-    //       <div className={classes.SelectedEmployee}>
-    //         <div className={classes.SelectedEmployeeDetails}>
-    //           <img
-    //             onClick={e => this.setState({ showImgModal: true })}
-    //             className={classes.SelectedEmployeePhoto}
-    //             src={this.state.selectedEmployee.employeePhoto}
-    //             alt="user"
-    //           />
+    if (this.state.selectedEmployee) {
+      if (employees[this.state.selectedEmployee.id]) {
+        employeeDetails = (
+          <div className={classes.SelectedEmployee}>
+            <div className={classes.SelectedEmployeeDetails}>
+              <img
+                onClick={e => this.setState({ showImgModal: true })}
+                className={classes.SelectedEmployeePhoto}
+                src={this.state.selectedEmployee.employeePhoto}
+                alt="user"
+              />
 
-    //           <div className={classes.SelectedEmployeeText}>
-    //             <p>
-    //               <span>Employee Name: </span>
-    //               {this.state.selectedEmployee.name}
-    //             </p>
-    //             <p>
-    //               <span>Employee Age: </span>
-    //               {this.state.selectedEmployee.age}
-    //             </p>
-    //           </div>
-    //         </div>
-    //         <Link
-    //           to={{
-    //             pathname: `${this.props.match.path}/${
-    //               this.state.selectedEmployee.id
-    //             }`,
-    //             state: {
-    //               name: this.state.selectedEmployee.name,
-    //               age: this.state.selectedEmployee.age,
-    //               id: this.state.selectedEmployee.id
-    //             }
-    //           }}
-    //         >
-    //           Show Details →
-    //         </Link>
-    //       </div>
-    //     );
-    //   }
-    // }
+              <div className={classes.SelectedEmployeeText}>
+                <p>
+                  <span>Employee Name: </span>
+                  {this.state.selectedEmployee.name}
+                </p>
+                <p>
+                  <span>Employee Age: </span>
+                  {this.state.selectedEmployee.age}
+                </p>
+              </div>
+            </div>
+            <Link
+              to={{
+                pathname: `${this.props.match.path}/${
+                  this.state.selectedEmployee.id
+                }`,
+                state: {
+                  name: this.state.selectedEmployee.name,
+                  age: this.state.selectedEmployee.age,
+                  id: this.state.selectedEmployee.id
+                }
+              }}
+            >
+              Show Details →
+            </Link>
+          </div>
+        );
+      }
+    }
 
     return (
       <div className={classes.Employees}>
@@ -140,13 +135,13 @@ class Employees extends Component {
           </div>
           <div className={classes.Employees_forms_right}>
             <h3>Employee Details</h3>
-
+            {employeeDetails}
             <SearchEmployee
-              employees={companyEmployees ? false : true}
+              employees={employees ? false : true}
               search={this.state.searchFilter}
               searchHandler={this.onSearchHandler}
             />
-            <ul className={classes.EmployeeList}>{employees}</ul>
+            <ul className={classes.EmployeeList}>{companyEmployees}</ul>
           </div>
           <Modal show={this.state.showModal}>
             <DeleteModal
@@ -193,7 +188,7 @@ class Employees extends Component {
 
 const mapStateToProps = state => {
   return {
-    company: state.employees.company
+    employees: state.employees.company.employees
   };
 };
 
