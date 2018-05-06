@@ -21,35 +21,41 @@ const reducer = (state = initialState, action) => {
         ...state,
         showCreateButton: action.showCreateButton
       };
-    case actionTypes.SET_EMPLOYEES:
-      return {
-        ...state,
-        // employees: { ...action.employees },
-        company: {
-          ...state.company,
-          employees: action.employees
-        },
-        showModal: false
-      };
+    // case actionTypes.SET_EMPLOYEES:
+    //   return {
+    //     ...state,
+    //     // employees: { ...action.employees },
+    //     company: {
+    //       ...state.company,
+    //       employees: action.employees
+    //     },
+    //     showModal: false
+    //   };
     case actionTypes.ADD_EMPLOYEE_SUCCESS:
       return {
         ...state,
         company: {
           ...state.company,
-          employees: {
-            ...state.employees,
-            [action.ref.key]: { ...action.employeeData }
+          [action.companyId]: {
+            ...state.company[action.companyId],
+            employees: {
+              ...state.company[action.companyId].employees,
+              [action.ref.key]: { ...action.employeeData }
+            }
           }
         }
       };
     case actionTypes.DELETE_EMPLOYEE_SUCCESS:
       const emp = [];
-      for (let employee in state.employees) {
+      const companyEmployees = state.company[action.companyId].employees;
+      for (let employee in companyEmployees) {
         emp.push({
-          ...state.employees[employee],
+          ...companyEmployees[employee],
           id: employee
         });
       }
+
+      console.log(emp);
 
       const newEmp = emp.filter(employee => employee.id !== action.id);
 
@@ -64,7 +70,10 @@ const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        employees
+        company: {
+          ...state.company[action.companyId],
+          employees
+        }
       };
     case actionTypes.UPDATE_EMPLOYEE_SUCCESS:
       return {
@@ -117,8 +126,7 @@ const reducer = (state = initialState, action) => {
         company: {
           ...state.company,
           [action.ref.key]: {
-            ...action.companyDetails,
-            companyId: action.ref.key
+            ...action.companyDetails
           }
         }
       };

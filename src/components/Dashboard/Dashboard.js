@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
 
 import Button from "../UI/Button/Button";
 import { initCompany } from "../../store/actions/employees";

@@ -7,9 +7,11 @@ export const createCompany = companyDetails => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
     return database
-      .ref(`users/${uid}/company`)
-      .push(companyDetails)
-      .then(ref => dispatch(createCompanySuccess(companyDetails, ref)));
+      .ref(`users/${uid}`)
+      .child("compnay")
+      .set(companyDetails);
+    // .push(companyDetails)
+    // .then(ref => dispatch(createCompanySuccess(companyDetails, ref)));
   };
 };
 
@@ -70,10 +72,11 @@ export const initEmployees = () => {
   };
 };
 
-export const addEmployeSucces = (employee, ref) => {
+export const addEmployeSucces = (employee, ref, companyId) => {
   return {
     type: actionTypes.ADD_EMPLOYEE_SUCCESS,
     employeeData: employee,
+    companyId,
     ref
   };
 };
@@ -81,27 +84,32 @@ export const addEmployeSucces = (employee, ref) => {
 export const addEmployee = values => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
+    const companyState = getState().employees.company;
+    const companyId = Object.keys(companyState)[0];
     database
-      .ref(`users/${uid}/employees`)
+      .ref(`users/${uid}/company/${companyId}/employees`)
       .push(values)
-      .then(ref => dispatch(addEmployeSucces(values, ref)));
+      .then(ref => dispatch(addEmployeSucces(values, ref, companyId)));
   };
 };
 
-export const deleteEmployeSucces = id => {
+export const deleteEmployeSucces = (id, companyId) => {
   return {
     type: actionTypes.DELETE_EMPLOYEE_SUCCESS,
-    id
+    id,
+    companyId
   };
 };
 
 export const deleteEmployee = id => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
+    const companyState = getState().employees.company;
+    const companyId = Object.keys(companyState)[0];
     database
-      .ref(`users/${uid}/employees/${id}`)
+      .ref(`users/${uid}/company/${companyId}/employees/${id}`)
       .remove()
-      .then(() => dispatch(deleteEmployeSucces(id)));
+      .then(() => dispatch(deleteEmployeSucces(id, companyId)));
   };
 };
 
