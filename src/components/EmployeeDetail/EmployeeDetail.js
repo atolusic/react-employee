@@ -5,10 +5,7 @@ import StarRatings from "react-star-ratings";
 
 import EmployeeForm from "../UI/Forms/EmployeeForm/EmployeeForm";
 import Modal from "../UI/Modal/Modal";
-import {
-  initCompany,
-  addEmployeeDescription
-} from "../../store/actions/employees";
+import { addEmployeeDescription } from "../../store/actions/employees";
 import Spinner from "../UI/Spinner/Spinner";
 import classes from "./EmployeeDetail.css";
 import Auxiliary from "../../hoc/Auxiliary";
@@ -26,10 +23,6 @@ class EmployeeDetail extends Component {
     rating: 0,
     showNotes: false
   };
-
-  componentDidMount() {
-    this.props.initCompany();
-  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.employees) {
@@ -197,7 +190,6 @@ const mapStateToProps = state => {
 
 export default withRouter(
   connect(mapStateToProps, {
-    initCompany,
     addEmployeeDescription
   })(EmployeeDetail)
 );

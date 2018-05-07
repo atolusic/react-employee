@@ -24,7 +24,7 @@
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
-  transition: all 0.1s;
+  transition: all 0.2s;
 }
 
 .Employee:hover {
@@ -38,6 +38,7 @@
 
 .Employee:hover .NameAndImgWrapper span {
   color: #fff;
+  transition: all 0.2s;
 }
 
 .Employee button {

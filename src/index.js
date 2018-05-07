@@ -13,6 +13,7 @@ import { login, logout } from "./store/actions/auth";
 import employeeReducer from "./store/reducers/employeesReducer";
 import authReducer from "./store/reducers/authReducer";
 import { firebase } from "./firebase/firebase";
+import { initCompany } from "./store/actions/employees";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -36,6 +37,8 @@ const app = (
   </Provider>
 );
 
+ReactDOM.render(<p>Loading...</p>, document.getElementById("root"));
+
 let hasRendered = false;
 const renderApp = () => {
   if (!hasRendered) {
@@ -47,10 +50,12 @@ const renderApp = () => {
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     store.dispatch(login(user));
-    renderApp();
-    if (history.location.pathname === "/") {
-      history.push("/dashboard");
-    }
+    store.dispatch(initCompany()).then(data => {
+      renderApp();
+      if (!data.company || history.location.pathname === "/") {
+        history.push("/dashboard");
+      }
+    });
   } else {
     store.dispatch(logout());
     renderApp();

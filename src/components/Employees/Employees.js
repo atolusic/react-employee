@@ -5,11 +5,7 @@ import { Link } from "react-router-dom";
 import AddEmployee from "./AddEmployee/AddEmployee";
 import Employee from "./Employee/Employee";
 import classes from "./Employees.css";
-import {
-  initCompany,
-  addEmployee,
-  deleteEmployee
-} from "../../store/actions/employees";
+import { addEmployee, deleteEmployee } from "../../store/actions/employees";
 import Spinner from "../UI/Spinner/Spinner";
 import SearchEmployee from "../SearchEmployee/SearchEmployee";
 import Modal from "../UI/Modal/Modal";
@@ -23,10 +19,6 @@ class Employees extends Component {
     showImgModal: false,
     readyForDelete: null
   };
-
-  componentDidMount() {
-    this.props.initCompany();
-  }
 
   showDetalisHandler = selectedEmployee => {
     this.setState({ selectedEmployee });
@@ -65,6 +57,7 @@ class Employees extends Component {
         .map((employee, i) => {
           return (
             <Employee
+              searchFilter={this.state.searchFilter}
               empNum={i + 1}
               key={employee.id}
               employee={employee}
@@ -193,7 +186,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  initCompany,
   addEmployee,
   deleteEmployee
 })(Employees);

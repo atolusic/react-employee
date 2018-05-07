@@ -8,10 +8,6 @@ import classes from "./Dashboard.css";
 import MapComponent from "../UI/MapComponent/MapComponenet";
 
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.initCompany();
-  }
-
   render() {
     const { history, location, company, showCreateButton } = this.props;
 
@@ -31,32 +27,6 @@ class Dashboard extends Component {
         </div>
       );
     }
-
-    /////////////////////////////////
-    /////* EMPLOYEES STRUCTURE */////
-    ////////////////////////////////
-
-    /* if (this.props.employees) {
-      const fetchedEmployees = [];
-      for (let employee in this.props.employees) {
-        fetchedEmployees.push({
-          ...this.props.employees[employee],
-          id: employee
-        });
-      }
-
-      employees = fetchedEmployees
-        .map((employee, i) => {
-          return (
-            <li key={employee.id}>
-              <Link to={`/employees/${employee.id}`} details={employee}>
-                {employee.name}
-              </Link>
-            </li>
-          );
-        })
-        .slice(0, 5);
-    } */
 
     return (
       <div className={classes.Dashboard}>

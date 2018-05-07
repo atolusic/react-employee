@@ -130,7 +130,7 @@ export const addEmployeeDescription = (id, values) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
     database
-      .ref(`users/${uid}/employees/${id}`)
+      .ref(`users/${uid}/company/employees/${id}`)
       .update(values)
       .then(() => dispatch(addEmployeeDescriptionSucces(id, values)));
   };
@@ -166,7 +166,7 @@ export const setEmployeePhoto = id => {
           employeePhoto: img
         };
         return database
-          .ref(`users/${uid}/employees/${id}`)
+          .ref(`users/${uid}/company/employees/${id}`)
           .update(photo)
           .then(imgURL => {
             dispatch(getUserPhotoSuccess(id, photo.employeePhoto));

@@ -14,6 +14,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.CREATE_COMPANY_SUCCESS:
+      return {
+        ...state,
+        company: {
+          ...action.companyDetails
+        }
+      };
     case actionTypes.INIT_COMPANY_SUCCESS:
       return {
         ...state,
@@ -29,16 +36,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         showCreateButton: action.showCreateButton
       };
-    // case actionTypes.SET_EMPLOYEES:
-    //   return {
-    //     ...state,
-    //     // employees: { ...action.employees },
-    //     company: {
-    //       ...state.company,
-    //       employees: action.employees
-    //     },
-    //     showModal: false
-    //   };
     case actionTypes.ADD_EMPLOYEE_SUCCESS:
       return {
         ...state,
@@ -93,22 +90,28 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_EMPLOYEE_DESCRIPTION_SUCCESS:
       return {
         ...state,
-        employees: {
-          ...state.employees,
-          [action.id]: {
-            ...state.employees[action.id],
-            description: action.desc
+        company: {
+          ...state.company,
+          employees: {
+            ...state.company.employees,
+            [action.id]: {
+              ...state.company.employees[action.id],
+              description: action.desc
+            }
           }
         }
       };
     case actionTypes.GET_USER_PHOTO_SUCCESS:
       return {
         ...state,
-        employees: {
-          ...state.employees,
-          [action.id]: {
-            ...state.employees[action.id],
-            employeePhoto: action.imgURL
+        company: {
+          ...state.company,
+          employees: {
+            ...state.company.employees,
+            [action.id]: {
+              ...state.company.employees[action.id],
+              employeePhoto: action.imgURL
+            }
           }
         }
       };
@@ -126,13 +129,7 @@ const reducer = (state = initialState, action) => {
           }
         }
       };
-    case actionTypes.CREATE_COMPANY_SUCCESS:
-      return {
-        ...state,
-        company: {
-          ...action.companyDetails
-        }
-      };
+
     default:
       return state;
   }
