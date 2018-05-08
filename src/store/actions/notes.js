@@ -5,7 +5,7 @@ export const addNote = (id, values) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
     return database
-      .ref(`users/${uid}/employees/${id}/notes`)
+      .ref(`users/${uid}/company/employees/${id}/notes`)
       .push(values)
       .then(ref => {
         dispatch(addNoteSuccess(id, values, ref));

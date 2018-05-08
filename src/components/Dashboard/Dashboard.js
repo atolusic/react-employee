@@ -8,6 +8,10 @@ import classes from "./Dashboard.css";
 import MapComponent from "../UI/MapComponent/MapComponenet";
 
 class Dashboard extends Component {
+  componentDidMount() {
+    const { initCompany } = this.props;
+    initCompany();
+  }
   render() {
     const { history, location, company, showCreateButton } = this.props;
 

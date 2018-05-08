@@ -38,7 +38,8 @@ class EmployeeForm extends Component {
         fieldValidationErrors.name = nameValid ? "" : " is invalid!";
         break;
       case "age":
-        ageValid = value >= 18;
+        let parsed = parseInt(value, 10);
+        ageValid = parsed >= 18;
         fieldValidationErrors.age = ageValid
           ? ""
           : " - you are not old enough to work!";

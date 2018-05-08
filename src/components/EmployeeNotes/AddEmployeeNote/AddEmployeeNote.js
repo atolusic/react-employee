@@ -59,7 +59,8 @@ class addEmployeeNote extends Component {
     let rateValid = this.state.rateInput;
     switch (fieldName) {
       case "rateInput":
-        rateValid = value >= 1 && value <= 5;
+        let parsed = parseInt(value, 10);
+        rateValid = parsed >= 1 && parsed <= 5;
         break;
       default:
         break;
@@ -97,7 +98,7 @@ class addEmployeeNote extends Component {
     };
 
     this.props.addNote(this.props.id, noteAndRating);
-    this.setState({ rateInput: 0 });
+    this.setState({ rateInput: 0, noteInput: "" });
   }
 
   render() {
@@ -117,7 +118,11 @@ class addEmployeeNote extends Component {
               .join(" ")})
           </p>
           <label htmlFor="noteInput">Notes</label>
-          <textarea name="noteInput" onChange={e => this.handleUserInput(e)} />
+          <textarea
+            value={this.state.noteInput}
+            name="noteInput"
+            onChange={e => this.handleUserInput(e)}
+          />
           <label htmlFor="rateInput">Rate employee 1-5.</label>
           <input
             name="rateInput"

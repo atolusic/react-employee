@@ -118,13 +118,16 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_NOTE_SUCCESS:
       return {
         ...state,
-        employees: {
-          ...state.employees,
-          [action.id]: {
-            ...state.employees[action.id],
-            notes: {
-              ...state.employees[action.id].notes,
-              [action.ref.key]: { ...action.values }
+        company: {
+          ...state.company,
+          employees: {
+            ...state.company.employees,
+            [action.id]: {
+              ...state.company.employees[action.id],
+              notes: {
+                ...state.company.employees[action.id].notes,
+                [action.ref.key]: { ...action.values }
+              }
             }
           }
         }

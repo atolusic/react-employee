@@ -51,25 +51,6 @@ export const initCompanySuccess = company => {
   };
 };
 
-export const setEmployees = employees => {
-  return {
-    type: actionTypes.SET_EMPLOYEES,
-    employees
-  };
-};
-
-export const initEmployees = () => {
-  return (dispatch, getState) => {
-    const uid = getState().auth.uid;
-    return database
-      .ref(`users/${uid}/employees`)
-      .once("value")
-      .then(snapshot => {
-        dispatch(setEmployees(snapshot.val()));
-      });
-  };
-};
-
 export const addEmployeSucces = (employee, ref, companyId) => {
   return {
     type: actionTypes.ADD_EMPLOYEE_SUCCESS,
