@@ -15,23 +15,14 @@ import Button from "../UI/Button/Button";
 
 class EmployeeDetail extends Component {
   state = {
-    name: "",
-    age: 18,
+    name: this.props.employees[this.props.match.params.id].name,
+    age: this.props.employees[this.props.match.params.id].age,
     description: "",
     showDescriptionTextArea: false,
     uploadImageCtrl: false,
     rating: 0,
     showNotes: false
   };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.employees) {
-      this.setState({
-        name: nextProps.employees[this.props.match.params.id].name,
-        age: nextProps.employees[this.props.match.params.id].age
-      });
-    }
-  }
 
   onDetailChangeHandler = (name, value) => {
     this.setState({ [name]: value });
@@ -66,9 +57,9 @@ class EmployeeDetail extends Component {
   render() {
     let detail = <Spinner />;
     const { showNotes } = this.state;
-    const { employees } = this.props;
 
-    if (employees) {
+    if (this.props.employees) {
+      const { employees } = this.props;
       let description = (
         <div>
           {employees[this.props.match.params.id].description ? (

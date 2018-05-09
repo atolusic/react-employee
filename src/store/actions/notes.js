@@ -21,3 +21,5 @@ export const addNoteSuccess = (id, values, ref) => {
     ref
   };
 };
+
+export const editNote = (id, values) => {};

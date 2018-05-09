@@ -89,19 +89,25 @@ class addEmployeeNote extends Component {
   }
 
   onSubmit(e, date) {
+    const { addNote, id, disableAddNote } = this.props;
+    const { noteInput, rateInput } = this.state;
+
     e.preventDefault();
 
     let noteAndRating = {
-      note: this.state.noteInput,
+      note: noteInput,
       noteDate: date,
-      review: this.state.rateInput
+      review: rateInput
     };
 
-    this.props.addNote(this.props.id, noteAndRating);
+    addNote(id, noteAndRating);
     this.setState({ rateInput: 0, noteInput: "" });
+    disableAddNote();
   }
 
   render() {
+    const { noteInput, rateInput, formValid } = this.state;
+
     const date = new Date()
       .toUTCString()
       .split(" ")
@@ -119,7 +125,7 @@ class addEmployeeNote extends Component {
           </p>
           <label htmlFor="noteInput">Notes</label>
           <textarea
-            value={this.state.noteInput}
+            value={noteInput}
             name="noteInput"
             onChange={e => this.handleUserInput(e)}
           />
@@ -128,9 +134,9 @@ class addEmployeeNote extends Component {
             name="rateInput"
             type="number"
             onChange={e => this.handleUserInput(e)}
-            value={this.state.rateInput}
+            value={rateInput}
           />
-          <button disabled={!this.state.formValid}>KLIK</button>
+          <button disabled={!formValid}>Add</button>
         </form>
       </Auxiliary>
     );

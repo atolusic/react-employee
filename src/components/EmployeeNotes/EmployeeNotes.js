@@ -1,22 +1,63 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import classes from "./EmployeeNotes.css";
 import AddEmployeeNote from "./AddEmployeeNote/AddEmployeeNote";
 import NoteAndRating from "./NoteAndRating/NoteAndRating";
 
 class EmployeeNotes extends React.Component {
-  render() {
-    let notesArray = [];
-    for (let key in this.props.employee.notes) {
+  state = {
+    disableAddNote: false
+  };
+
+  componentDidMount() {
+    this.disableAddNote();
+  }
+
+  editNote = () => {};
+
+  createNotesArray(arr, notes) {
+    for (let key in notes) {
       if (key !== "initialNote") {
-        notesArray.push(this.props.employee.notes[key]);
+        arr.push(notes[key]);
       }
     }
+  }
+
+  disableAddNote = () => {
+    const { employee } = this.props;
+
+    let notesArray = [];
+    this.createNotesArray(notesArray, employee.notes);
+
+    const date = {
+      day: new Date().getDay(),
+      month: new Date().getMonth()
+    };
+
+    notesArray.forEach(note => {
+      const noteDate = new Date(note.noteDate);
+      if (
+        noteDate.getDay() === date.day &&
+        noteDate.getMonth() === date.month
+      ) {
+        this.setState({ disableAddNote: true });
+      }
+    });
+  };
+
+  render() {
+    const { getRating, id, employee, showNotes } = this.props;
+    const { EmployeeNotes, EmployeeNotesExpanded } = classes;
+    const { disableAddNote } = this.state;
+
+    let notesArray = [];
+    this.createNotesArray(notesArray, employee.notes);
 
     return (
       <div
-        className={`${classes.EmployeeNotes} ${
-          this.props.showNotes ? classes.EmployeeNotesExpanded : null
+        className={`${EmployeeNotes} ${
+          showNotes ? EmployeeNotesExpanded : null
         }`}
       >
         <div>
@@ -27,14 +68,19 @@ class EmployeeNotes extends React.Component {
             })}
           </ul>
         </div>
-        <AddEmployeeNote
-          getRating={this.props.getRating}
-          id={this.props.id}
-          employee={this.props.employee}
-        />
+        {!disableAddNote ? (
+          <AddEmployeeNote
+            disableAddNote={() => this.setState({ disableAddNote: true })}
+            getRating={getRating}
+            id={id}
+            employee={employee}
+          />
+        ) : (
+          <p>You already added note for today!</p>
+        )}
       </div>
     );
   }
 }
 
-export default EmployeeNotes;
+export default connect()(EmployeeNotes);
