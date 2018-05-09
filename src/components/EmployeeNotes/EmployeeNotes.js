@@ -14,12 +14,14 @@ class EmployeeNotes extends React.Component {
     this.disableAddNote();
   }
 
-  editNote = () => {};
+  editNote = noteId => {
+    console.log(noteId);
+  };
 
   createNotesArray(arr, notes) {
     for (let key in notes) {
       if (key !== "initialNote") {
-        arr.push(notes[key]);
+        arr.push({ ...notes[key], noteId: key });
       }
     }
   }
@@ -64,7 +66,13 @@ class EmployeeNotes extends React.Component {
           <p>Notes and ratings</p>
           <ul>
             {notesArray.map(note => {
-              return <NoteAndRating key={note.noteDate} {...note} />;
+              return (
+                <NoteAndRating
+                  editNote={this.editNote}
+                  key={note.noteDate}
+                  {...note}
+                />
+              );
             })}
           </ul>
         </div>
