@@ -7,11 +7,61 @@ import NoteAndRating from "./NoteAndRating/NoteAndRating";
 
 class EmployeeNotes extends React.Component {
   state = {
-    disableAddNote: false
+    disableAddNote: false,
+    overallRating: 0
   };
+
+  conutRating(propType) {
+    let rateings = [];
+    for (let note in propType.employee.notes) {
+      rateings.push(parseInt(propType.employee.notes[note].review, 10));
+    }
+    return rateings.reduce((acc, next) => {
+      return acc + next;
+    }, 0);
+  }
+
+  setOverallRating(lifecycle, nextProps, propType) {
+    let rateing = this.conutRating(propType);
+    let ifTrue = null;
+
+    const handleSetState = iftrue => {
+      if (iftrue) {
+        this.setState(
+          {
+            overallRating:
+              rateing / (Object.keys(propType.employee.notes).length - 1)
+          },
+          () => {
+            this.props.getRating(this.state.overallRating);
+          }
+        );
+      }
+    };
+
+    switch (lifecycle) {
+      case "didMount":
+        ifTrue = Object.keys(this.props.employee.notes).length > 1;
+        handleSetState(ifTrue);
+        break;
+      case "willReciveProps":
+        ifTrue =
+          Object.keys(this.props.employee.notes).length !==
+          Object.keys(nextProps.employee.notes).length;
+        handleSetState(ifTrue);
+        break;
+      default:
+        return;
+    }
+  }
 
   componentDidMount() {
     this.disableAddNote();
+    this.setOverallRating("didMount", null, this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setOverallRating("willReciveProps", nextProps, nextProps);
   }
 
   editNote = noteId => {

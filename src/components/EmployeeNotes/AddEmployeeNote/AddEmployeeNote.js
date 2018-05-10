@@ -6,43 +6,11 @@ import Auxiliary from "../../../hoc/Auxiliary";
 
 class addEmployeeNote extends Component {
   state = {
-    overallRating: 0,
     rateInput: 0,
     noteInput: "",
     rateValid: false,
     formValid: false
   };
-
-  conutRating(propType) {
-    let rateings = [];
-    for (let note in propType.employee.notes) {
-      rateings.push(parseInt(propType.employee.notes[note].review, 10));
-    }
-    return rateings.reduce((acc, next) => {
-      return acc + next;
-    }, 0);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.employee.notes) {
-      let rateing = 0;
-      if (
-        Object.keys(this.props.employee.notes).length !==
-        Object.keys(nextProps.employee.notes).length
-      ) {
-        rateing = this.conutRating(nextProps);
-        this.setState(
-          {
-            overallRating:
-              rateing / (Object.keys(nextProps.employee.notes).length - 1)
-          },
-          () => {
-            this.props.getRating(this.state.overallRating);
-          }
-        );
-      }
-    }
-  }
 
   handleUserInput(e) {
     const name = e.target.name;
@@ -71,21 +39,6 @@ class addEmployeeNote extends Component {
 
   validateForm() {
     this.setState({ formValid: this.state.rateValid });
-  }
-
-  componentDidMount() {
-    let rateing = this.conutRating(this.props);
-    if (Object.keys(this.props.employee.notes).length > 1) {
-      this.setState(
-        {
-          overallRating:
-            rateing / (Object.keys(this.props.employee.notes).length - 1)
-        },
-        () => {
-          this.props.getRating(this.state.overallRating);
-        }
-      );
-    }
   }
 
   onSubmit(e, date) {
